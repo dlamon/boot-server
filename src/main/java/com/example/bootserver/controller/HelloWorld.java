@@ -9,19 +9,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloWorld {
 
+    /*
     @Value("${com.example.env}")
     private String env;
     @Value("${com.example.hello}")
     private String hello;
     @Value("${com.example.world}")
     private String world;
+    */
 
-    @Autowired
     private Config config;
+
+    public HelloWorld(Config config) {
+        this.config = config;
+    }
 
     @RequestMapping("/")
     public String helloWorld() {
-        return "[" + env + "]" + hello + "," + world;
-        // return config.getHello() + "," + config.getWorld();
+        // return "[" + env + "]" + hello + "," + world;
+
+        return config.getHello() + "," + config.getWorld();
     }
 }
