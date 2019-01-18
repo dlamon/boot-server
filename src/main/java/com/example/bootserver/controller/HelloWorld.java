@@ -12,9 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
-@RestController
 @Slf4j
-@Data
+@RestController
 public class HelloWorld {
 
     /*
@@ -33,9 +32,9 @@ public class HelloWorld {
     }
 
     @RequestMapping("/")
-    public String helloWorld(@NonNull String name) {
+    public String helloWorld(String name) {
         // return "[" + env + "]" + hello + "," + world;
         log.debug("This is a debug message!");
-        return config.getHello() + "," + config.getWorld();
+        return config.getEnv() + "," + config.getHello() + "," + config.getWorld();
     }
 }
