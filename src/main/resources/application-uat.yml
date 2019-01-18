@@ -1,0 +1,12 @@
+com:
+  example:
+    env: uat
+    hello: hello
+    world: world
+logging:
+  file:
+    max-size: 8KB
+    max-history: 1
+  path: ./logs/server.log
+  level:
+    com.example.bootserver: DEBUG
