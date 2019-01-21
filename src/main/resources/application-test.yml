@@ -1,12 +1,14 @@
 com:
   example:
-    env: dev
+    env: test
 
 server:
   port: 20080
 
 logging:
-  file: /var/logs/server.log
+  file: ./logs/server.log
+  level:
+    com.example.bootserver: DEBUG
 
 spring:
   datasource:
@@ -26,4 +28,4 @@ spring:
 management:
   endpoint:
     logfile:
-      external-file: /var/logs/server.log
+      external-file: ./logs/server.log

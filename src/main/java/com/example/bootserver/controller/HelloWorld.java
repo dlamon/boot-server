@@ -34,7 +34,8 @@ public class HelloWorld {
     @RequestMapping("/")
     public String helloWorld(String name) {
         // return "[" + env + "]" + hello + "," + world;
-        log.debug("This is a debug message!");
+        log.debug("[DEBUG]This is a debug message!");
+        log.info("[INFO]This is a debug message!");
         return config.getEnv() + "," + config.getHello() + "," + config.getWorld();
     }
 }
