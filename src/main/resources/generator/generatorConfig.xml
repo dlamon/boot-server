@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-    <classPathEntry
-        location="/Users/liaowei/Work/maven/repository/mysql/mysql-connector-java/5.1.47/mysql-connector-java-5.1.47.jar"
-    />
-
-    <context id="example" defaultModelType="flat" targetRuntime="MyBatis3">
+    <context id="example" targetRuntime="MyBatis3Simple" defaultModelType="flat">
         <property name="javaFileEncoding" value="UTF-8" />
+        <property name="beginningDelimiter" value="`" />
+        <property name="endingDelimiter" value="`" />
+
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="com.example.boot.server.util.MybatisMapper" />
+        </plugin>
+
         <commentGenerator>
             <property name="suppressDate" value="true" />
-            <property name="suppressAllComments" value="true" />
+            <property name="suppressAllComments" value="false" />
         </commentGenerator>
+
         <!-- <jdbcConnection driverClass="com.mysql.jdbc.Driver" -->
         <jdbcConnection
                 driverClass="com.mysql.jdbc.Driver"
@@ -24,7 +28,7 @@
         </javaTypeResolver>
 
         <javaModelGenerator
-                targetPackage="com.example.boot.server.db.entity"
+                targetPackage="com.example.boot.server.model"
                 targetProject="src/main/java"
         >
             <property name="constructorBased" value="false" />
@@ -33,15 +37,15 @@
         </javaModelGenerator>
 
         <sqlMapGenerator
-                targetPackage="com.example.boot.server.db.mapper"
-                targetProject="src/main/java"
+                targetPackage="mapper"
+                targetProject="src/main/resources"
         >
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <javaClientGenerator
                 type="XMLMAPPER"
-                targetPackage="com.example.boot.server.db.dao"
+                targetPackage="com.example.boot.server.mapper"
                 targetProject="src/main/java"
         >
             <property name="enableSubPackages" value="true"/>
@@ -49,10 +53,6 @@
 
         <table
                 tableName="basic_info"
-                enableCountByExample="false"
-                enableDeleteByExample="false"
-                enableSelectByExample="false"
-                enableUpdateByExample="false"
         />
 
     </context>
