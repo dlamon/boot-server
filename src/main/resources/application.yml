@@ -6,14 +6,14 @@ spring:
   datasource:
     druid:
       initial-size: 1
+      min-idle: 1
       max-active: 200
       max-wait: 60000
-      min-idle: 1
       time-between-eviction-runs-millis: 60000
       min-evictable-idle-time-millis: 300000
-      test-while-idle: true
-      test-on-borrow: false
-      test-on-return: false
+      #test-while-idle: false
+      #test-on-borrow: true
+      #test-on-return: false
       validation-query: SELECT 1 FROM DUAL
       stat-view-servlet:
         login-username: admin
