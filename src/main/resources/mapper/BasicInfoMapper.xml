@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.boot.server.mapper.BasicInfoMapper">
+  <resultMap id="BaseResultMap" type="com.example.boot.server.model.BasicInfo">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="age" jdbcType="TINYINT" property="age" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="salary" jdbcType="DECIMAL" property="salary" />
+  </resultMap>
+</mapper>
