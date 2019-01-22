@@ -1,16 +1,9 @@
-package com.example.bootserver.controller;
+package com.example.boot.server.controller;
 
-import com.example.bootserver.config.Config;
-import lombok.Data;
-import lombok.NonNull;
+import com.example.boot.server.config.Config;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 
 @Slf4j
 @RestController
