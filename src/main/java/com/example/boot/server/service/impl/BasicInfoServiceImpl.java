@@ -3,7 +3,6 @@ package com.example.boot.server.service.impl;
 import com.example.boot.server.mapper.BasicInfoMapper;
 import com.example.boot.server.model.BasicInfo;
 import com.example.boot.server.service.BasicInfoService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,8 +12,11 @@ import java.util.List;
  */
 @Service
 public class BasicInfoServiceImpl implements BasicInfoService {
-    @Autowired
     private BasicInfoMapper basicInfoMapper;
+
+    public BasicInfoServiceImpl(BasicInfoMapper basicInfoMapper) {
+        this.basicInfoMapper = basicInfoMapper;
+    }
 
     @Override
     public void saveBasicInfo(BasicInfo basicInfo) {
@@ -32,12 +34,12 @@ public class BasicInfoServiceImpl implements BasicInfoService {
     }
 
     @Override
-    public void queryBasicInfoById(Integer id) {
-        basicInfoMapper.selectByPrimaryKey(id);
+    public BasicInfo queryBasicInfoById(Integer id) {
+        return basicInfoMapper.selectByPrimaryKey(id);
     }
 
     @Override
     public List<BasicInfo> queryBasicInfoList(BasicInfo basicInfo) {
-        return null;
+        return basicInfoMapper.select(basicInfo);
     }
 }
