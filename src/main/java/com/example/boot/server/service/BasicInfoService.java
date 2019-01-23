@@ -14,7 +14,7 @@ public interface BasicInfoService {
 
     public void deleteBasicInfo(Integer id);
 
-    public void queryBasicInfoById(Integer id);
+    public BasicInfo queryBasicInfoById(Integer id);
 
     public List<BasicInfo> queryBasicInfoList(BasicInfo basicInfo);
 }
