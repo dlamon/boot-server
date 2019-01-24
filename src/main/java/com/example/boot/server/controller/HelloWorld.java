@@ -23,12 +23,10 @@ public class HelloWorld {
 
     private Config config;
     private BasicInfoService basicInfoService;
-    private Message message;
 
-    public HelloWorld(Config config, BasicInfoService basicInfoService, Message message) {
+    public HelloWorld(Config config, BasicInfoService basicInfoService) {
         this.config = config;
         this.basicInfoService = basicInfoService;
-        this.message = message;
     }
 
     @RequestMapping("/")
@@ -36,10 +34,10 @@ public class HelloWorld {
         log.debug("[DEBUG]This is a debug message!");
         log.info("[INFO]This is a info message!");
 
-        String errorInfo = message.getMessage("E000001");
+        String errorInfo = Message.getMessage("E000001");
         log.error("[ERROR]errorInfo:{}", errorInfo);
 
-        String errorInfo2 = message.getMessage("E000002", new Object[]{"测试参数"});
+        String errorInfo2 = Message.getMessage("E000002", new Object[]{"测试参数"});
         log.error("[ERROR]errorInfo2:{}", errorInfo2);
 
         BasicInfo basicInfo = basicInfoService.queryBasicInfoById(1);
