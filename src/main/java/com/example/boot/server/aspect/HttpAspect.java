@@ -26,7 +26,7 @@ public class HttpAspect {
     public void doBefore(JoinPoint joinPoint) {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
-        Map<String, Object> requestMap = new HashMap<String, Object>();
+        Map<String, Object> requestMap = new HashMap<String, Object>(5);
         requestMap.put("url", request.getRequestURL());
         requestMap.put("method", request.getMethod());
         requestMap.put("ip", request.getRemoteAddr());

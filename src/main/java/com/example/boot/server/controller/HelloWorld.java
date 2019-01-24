@@ -2,9 +2,10 @@ package com.example.boot.server.controller;
 
 import com.example.boot.server.config.Config;
 import com.example.boot.server.pojo.ddo.BasicInfoDO;
+import com.example.boot.server.pojo.vo.ResultVO;
 import com.example.boot.server.service.BasicInfoService;
 import com.example.boot.server.util.MessageUtil;
-import com.example.boot.server.util.Result;
+import com.example.boot.server.util.ResultUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,7 +32,7 @@ public class HelloWorld {
     }
 
     @RequestMapping("/")
-    public Result helloWorld() {
+    public ResultVO<BasicInfoDO> helloWorld() {
         log.debug("[DEBUG]This is a debug message!");
         log.info("[INFO]This is a info message!");
 
@@ -45,7 +46,7 @@ public class HelloWorld {
         log.info("basicInfoDO:{}", basicInfoDO);
 
         // return config.getEnv() + "," + config.getHello() + "," + config.getWorld() + "," + basicInfo.getName();
-        return Result.success(basicInfoDO);
+        return ResultUtil.success(basicInfoDO);
     }
 
 }
