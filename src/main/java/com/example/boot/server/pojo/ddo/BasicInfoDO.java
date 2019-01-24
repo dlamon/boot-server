@@ -1,10 +1,10 @@
-package com.example.boot.server.model;
+package com.example.boot.server.pojo.ddo;
 
 import java.math.BigDecimal;
 import javax.persistence.*;
 
 @Table(name = "basic_info")
-public class BasicInfo {
+public class BasicInfoDO {
     /**
      * 自增编号
      */

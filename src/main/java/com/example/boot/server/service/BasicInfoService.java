@@ -1,6 +1,6 @@
 package com.example.boot.server.service;
 
-import com.example.boot.server.model.BasicInfo;
+import com.example.boot.server.pojo.ddo.BasicInfoDO;
 
 import java.util.List;
 
@@ -8,13 +8,13 @@ import java.util.List;
  * @author liaowei
  */
 public interface BasicInfoService {
-    public void saveBasicInfo(BasicInfo basicInfo);
+    public void saveBasicInfo(BasicInfoDO basicInfoDO);
 
-    public void updateBasicInfo(BasicInfo basicInfo);
+    public void updateBasicInfo(BasicInfoDO basicInfoDO);
 
     public void deleteBasicInfo(Integer id);
 
-    public BasicInfo queryBasicInfoById(Integer id);
+    public BasicInfoDO queryBasicInfoById(Integer id);
 
-    public List<BasicInfo> queryBasicInfoList(BasicInfo basicInfo);
+    public List<BasicInfoDO> queryBasicInfoList(BasicInfoDO basicInfoDO);
 }

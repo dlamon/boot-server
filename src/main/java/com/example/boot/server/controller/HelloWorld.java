@@ -1,9 +1,10 @@
 package com.example.boot.server.controller;
 
 import com.example.boot.server.config.Config;
-import com.example.boot.server.model.BasicInfo;
+import com.example.boot.server.pojo.ddo.BasicInfoDO;
 import com.example.boot.server.service.BasicInfoService;
-import com.example.boot.server.util.Message;
+import com.example.boot.server.util.MessageUtil;
+import com.example.boot.server.util.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,19 +31,21 @@ public class HelloWorld {
     }
 
     @RequestMapping("/")
-    public String helloWorld() {
+    public Result helloWorld() {
         log.debug("[DEBUG]This is a debug message!");
         log.info("[INFO]This is a info message!");
 
-        String errorInfo = Message.getMessage("E000001");
+        String errorInfo = MessageUtil.getMessage("E000001");
         log.error("[ERROR]errorInfo:{}", errorInfo);
 
-        String errorInfo2 = Message.getMessage("E000002", new Object[]{"测试参数"});
+        String errorInfo2 = MessageUtil.getMessage("E000002", new Object[]{"测试参数"});
         log.error("[ERROR]errorInfo2:{}", errorInfo2);
 
-        BasicInfo basicInfo = basicInfoService.queryBasicInfoById(1);
+        BasicInfoDO basicInfoDO = basicInfoService.queryBasicInfoById(1);
+        log.info("basicInfoDO:{}", basicInfoDO);
 
-        return config.getEnv() + "," + config.getHello() + "," + config.getWorld() + "," + basicInfo.getName();
+        // return config.getEnv() + "," + config.getHello() + "," + config.getWorld() + "," + basicInfo.getName();
+        return Result.success(basicInfoDO);
     }
 
 }

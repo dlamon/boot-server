@@ -28,7 +28,7 @@
         </javaTypeResolver>
 
         <javaModelGenerator
-                targetPackage="com.example.boot.server.model"
+                targetPackage="com.example.boot.server.pojo.ddo"
                 targetProject="src/main/java"
         >
             <property name="constructorBased" value="false" />
@@ -37,7 +37,7 @@
         </javaModelGenerator>
 
         <sqlMapGenerator
-                targetPackage="mapper"
+                targetPackage="dao"
                 targetProject="src/main/resources"
         >
             <property name="enableSubPackages" value="true"/>
@@ -45,7 +45,7 @@
 
         <javaClientGenerator
                 type="XMLMAPPER"
-                targetPackage="com.example.boot.server.mapper"
+                targetPackage="com.example.boot.server.dao"
                 targetProject="src/main/java"
         >
             <property name="enableSubPackages" value="true"/>
@@ -53,6 +53,8 @@
 
         <table
                 tableName="basic_info"
+                domainObjectName="BasicInfoDO"
+                mapperName="BasicInfoDao"
         />
 
     </context>

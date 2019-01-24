@@ -8,7 +8,7 @@ import tk.mybatis.spring.annotation.MapperScan;
  * @author liaowei
  */
 @SpringBootApplication
-@MapperScan("com.example.boot.server.mapper")
+@MapperScan("com.example.boot.server.dao")
 public class BootServerApplication {
 
     public static void main(String[] args) {

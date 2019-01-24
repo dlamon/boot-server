@@ -1,7 +1,7 @@
 package com.example.boot.server.service.impl;
 
-import com.example.boot.server.mapper.BasicInfoMapper;
-import com.example.boot.server.model.BasicInfo;
+import com.example.boot.server.dao.BasicInfoDao;
+import com.example.boot.server.pojo.ddo.BasicInfoDO;
 import com.example.boot.server.service.BasicInfoService;
 import org.springframework.stereotype.Service;
 
@@ -12,34 +12,34 @@ import java.util.List;
  */
 @Service
 public class BasicInfoServiceImpl implements BasicInfoService {
-    private BasicInfoMapper basicInfoMapper;
+    private BasicInfoDao basicInfoDao;
 
-    public BasicInfoServiceImpl(BasicInfoMapper basicInfoMapper) {
-        this.basicInfoMapper = basicInfoMapper;
+    public BasicInfoServiceImpl(BasicInfoDao basicInfoDao) {
+        this.basicInfoDao = basicInfoDao;
     }
 
     @Override
-    public void saveBasicInfo(BasicInfo basicInfo) {
-        basicInfoMapper.insert(basicInfo);
+    public void saveBasicInfo(BasicInfoDO basicInfoDO) {
+        basicInfoDao.insert(basicInfoDO);
     }
 
     @Override
-    public void updateBasicInfo(BasicInfo basicInfo) {
-        basicInfoMapper.updateByPrimaryKeySelective(basicInfo);
+    public void updateBasicInfo(BasicInfoDO basicInfoDO) {
+        basicInfoDao.updateByPrimaryKeySelective(basicInfoDO);
     }
 
     @Override
     public void deleteBasicInfo(Integer id) {
-        basicInfoMapper.deleteByPrimaryKey(id);
+        basicInfoDao.deleteByPrimaryKey(id);
     }
 
     @Override
-    public BasicInfo queryBasicInfoById(Integer id) {
-        return basicInfoMapper.selectByPrimaryKey(id);
+    public BasicInfoDO queryBasicInfoById(Integer id) {
+        return basicInfoDao.selectByPrimaryKey(id);
     }
 
     @Override
-    public List<BasicInfo> queryBasicInfoList(BasicInfo basicInfo) {
-        return basicInfoMapper.select(basicInfo);
+    public List<BasicInfoDO> queryBasicInfoList(BasicInfoDO basicInfoDO) {
+        return basicInfoDao.select(basicInfoDO);
     }
 }
