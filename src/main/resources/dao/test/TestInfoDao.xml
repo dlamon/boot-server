@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.boot.server.dao.test.TestInfoDao">
+  <resultMap id="BaseResultMap" type="com.example.boot.server.pojo.ddo.test.TestInfoDO">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="no" jdbcType="INTEGER" property="no" />
+    <result column="user" jdbcType="VARCHAR" property="user" />
+    <result column="result" jdbcType="VARCHAR" property="result" />
+  </resultMap>
+</mapper>

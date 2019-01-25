@@ -1,9 +1,9 @@
 package com.example.boot.server.controller;
 
 import com.example.boot.server.config.Config;
-import com.example.boot.server.pojo.ddo.BasicInfoDO;
+import com.example.boot.server.pojo.dto.AllInfoDTO;
 import com.example.boot.server.pojo.vo.ResultVO;
-import com.example.boot.server.service.BasicInfoService;
+import com.example.boot.server.service.InfoService;
 import com.example.boot.server.util.MessageUtil;
 import com.example.boot.server.util.ResultUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -24,15 +24,15 @@ public class HelloWorld {
     */
 
     private Config config;
-    private BasicInfoService basicInfoService;
+    private InfoService infoService;
 
-    public HelloWorld(Config config, BasicInfoService basicInfoService) {
+    public HelloWorld(Config config, InfoService infoService) {
         this.config = config;
-        this.basicInfoService = basicInfoService;
+        this.infoService = infoService;
     }
 
     @RequestMapping("/")
-    public ResultVO<BasicInfoDO> helloWorld() {
+    public ResultVO<AllInfoDTO> helloWorld() {
         log.debug("[DEBUG]This is a debug message!");
         log.info("[INFO]This is a info message!");
 
@@ -42,11 +42,10 @@ public class HelloWorld {
         String errorInfo2 = MessageUtil.getMessage("E000002", new Object[]{"测试参数"});
         log.error("[ERROR]errorInfo2:{}", errorInfo2);
 
-        BasicInfoDO basicInfoDO = basicInfoService.queryBasicInfoById(1);
-        log.info("basicInfoDO:{}", basicInfoDO);
+        AllInfoDTO allInfoDTO = infoService.getAllInfoById(1);
 
         // return config.getEnv() + "," + config.getHello() + "," + config.getWorld() + "," + basicInfo.getName();
-        return ResultUtil.success(basicInfoDO);
+        return ResultUtil.success(allInfoDTO);
     }
 
 }

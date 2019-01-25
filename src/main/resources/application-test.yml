@@ -12,12 +12,21 @@ logging:
 
 spring:
   datasource:
-    url: jdbc:mysql://www.liaowei.net.cn:3306/example?useUnicode=true&characterEncoding=utf-8&useSSL=false
-    username: root
-    password: D2FBSRnI9pINFXDTvk2iwV1fH6tzf5g20+0ybNPPzVR1V3v4J4Nogrhlq9aC6dAmtYgN8ResV3cRB8jKimqFSA==
-    druid:
-      public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALEES7YdizRkdgEzKFyiPV6hoOisL246Kl4abLaVWq8XQ7eZQdkp6pCc9lAzIADwqCAkYZXGEgX08gOUTPqbL70CAwEAAQ==
-      connection-properties: config.decrypt=true;config.decrypt.key=${spring.datasource.druid.public-key}
+    example:
+      druid:
+        url: jdbc:mysql://www.liaowei.net.cn:3306/example?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: root
+        password: D2FBSRnI9pINFXDTvk2iwV1fH6tzf5g20+0ybNPPzVR1V3v4J4Nogrhlq9aC6dAmtYgN8ResV3cRB8jKimqFSA==
+        public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALEES7YdizRkdgEzKFyiPV6hoOisL246Kl4abLaVWq8XQ7eZQdkp6pCc9lAzIADwqCAkYZXGEgX08gOUTPqbL70CAwEAAQ==
+        connection-properties: config.decrypt=true;config.decrypt.key=${spring.datasource.example.druid.public-key}
+    test:
+      druid:
+        url: jdbc:mysql://www.liaowei.net.cn:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: root
+        password: D2FBSRnI9pINFXDTvk2iwV1fH6tzf5g20+0ybNPPzVR1V3v4J4Nogrhlq9aC6dAmtYgN8ResV3cRB8jKimqFSA==
+        public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALEES7YdizRkdgEzKFyiPV6hoOisL246Kl4abLaVWq8XQ7eZQdkp6pCc9lAzIADwqCAkYZXGEgX08gOUTPqbL70CAwEAAQ==
+        connection-properties: config.decrypt=true;config.decrypt.key=${spring.datasource.test.druid.public-key}
+
   boot:
     admin:
       client:
