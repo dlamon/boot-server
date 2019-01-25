@@ -31,4 +31,8 @@ public class ResultUtil {
         resultVO.setMessage(message);
         return resultVO;
     }
+
+    public static <E> ResultVO<E> error(String code) {
+        return error(code, null);
+    }
 }
