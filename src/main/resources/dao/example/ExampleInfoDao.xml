@@ -9,7 +9,10 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="age" jdbcType="TINYINT" property="age" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="salary" jdbcType="DECIMAL" property="salary" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
 </mapper>

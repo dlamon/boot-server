@@ -1,12 +1,15 @@
 package com.example.boot.server.pojo.ddo.example;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.math.BigDecimal;
-import javax.persistence.*;
+import java.util.Date;
 
 @Table(name = "example_info")
 public class ExampleInfoDO {
     /**
-     * 自增编号
+     * 编号
      */
     @Id
     private Integer id;
@@ -27,6 +30,11 @@ public class ExampleInfoDO {
     private Byte age;
 
     /**
+     * 性别 1-男 2-女
+     */
+    private String sex;
+
+    /**
      * 住址
      */
     private String address;
@@ -37,18 +45,30 @@ public class ExampleInfoDO {
     private BigDecimal salary;
 
     /**
-     * 获取自增编号
+     * 创建时间
+     */
+    @Column(name = "create_time")
+    private Date createTime;
+
+    /**
+     * 更新时间
+     */
+    @Column(name = "update_time")
+    private Date updateTime;
+
+    /**
+     * 获取编号
      *
-     * @return id - 自增编号
+     * @return id - 编号
      */
     public Integer getId() {
         return id;
     }
 
     /**
-     * 设置自增编号
+     * 设置编号
      *
-     * @param id 自增编号
+     * @param id 编号
      */
     public void setId(Integer id) {
         this.id = id;
@@ -109,6 +129,24 @@ public class ExampleInfoDO {
     }
 
     /**
+     * 获取性别 1-男 2-女
+     *
+     * @return sex - 性别 1-男 2-女
+     */
+    public String getSex() {
+        return sex;
+    }
+
+    /**
+     * 设置性别 1-男 2-女
+     *
+     * @param sex 性别 1-男 2-女
+     */
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    /**
      * 获取住址
      *
      * @return address - 住址
@@ -142,5 +180,41 @@ public class ExampleInfoDO {
      */
     public void setSalary(BigDecimal salary) {
         this.salary = salary;
+    }
+
+    /**
+     * 获取创建时间
+     *
+     * @return create_time - 创建时间
+     */
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    /**
+     * 设置创建时间
+     *
+     * @param createTime 创建时间
+     */
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    /**
+     * 获取更新时间
+     *
+     * @return update_time - 更新时间
+     */
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    /**
+     * 设置更新时间
+     *
+     * @param updateTime 更新时间
+     */
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }

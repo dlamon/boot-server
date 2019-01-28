@@ -6,7 +6,6 @@
       WARNING - @mbg.generated
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="no" jdbcType="INTEGER" property="no" />
     <result column="user" jdbcType="VARCHAR" property="user" />
     <result column="result" jdbcType="VARCHAR" property="result" />
   </resultMap>

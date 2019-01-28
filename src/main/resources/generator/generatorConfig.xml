@@ -18,7 +18,7 @@
         <!-- <jdbcConnection driverClass="com.mysql.jdbc.Driver" -->
         <jdbcConnection
                 driverClass="com.mysql.jdbc.Driver"
-                connectionURL="jdbc:mysql://www.liaowei.net.cn:3306/test?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false"
+                connectionURL="jdbc:mysql://www.liaowei.net.cn:3306/example?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false"
                 userId="root"
                 password="root123"
         />
@@ -28,7 +28,7 @@
         </javaTypeResolver>
 
         <javaModelGenerator
-                targetPackage="com.example.boot.server.pojo.ddo.test"
+                targetPackage="com.example.boot.server.pojo.ddo.example"
                 targetProject="src/main/java"
         >
             <property name="constructorBased" value="false" />
@@ -37,7 +37,7 @@
         </javaModelGenerator>
 
         <sqlMapGenerator
-                targetPackage="dao.test"
+                targetPackage="dao.example"
                 targetProject="src/main/resources"
         >
             <property name="enableSubPackages" value="true"/>
@@ -45,16 +45,16 @@
 
         <javaClientGenerator
                 type="XMLMAPPER"
-                targetPackage="com.example.boot.server.dao.test"
+                targetPackage="com.example.boot.server.dao.example"
                 targetProject="src/main/java"
         >
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
         <table
-                tableName="test_info"
-                domainObjectName="TestInfoDO"
-                mapperName="TestInfoDao"
+                tableName="example_info"
+                domainObjectName="ExampleInfoDO"
+                mapperName="ExampleInfoDao"
         />
 
     </context>

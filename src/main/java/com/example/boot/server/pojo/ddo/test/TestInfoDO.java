@@ -7,8 +7,6 @@ public class TestInfoDO {
     @Id
     private Integer id;
 
-    private Integer no;
-
     private String user;
 
     private String result;
@@ -25,20 +23,6 @@ public class TestInfoDO {
      */
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    /**
-     * @return no
-     */
-    public Integer getNo() {
-        return no;
-    }
-
-    /**
-     * @param no
-     */
-    public void setNo(Integer no) {
-        this.no = no;
     }
 
     /**
