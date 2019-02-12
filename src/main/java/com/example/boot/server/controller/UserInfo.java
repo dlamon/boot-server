@@ -1,7 +1,7 @@
 package com.example.boot.server.controller;
 
-import com.example.boot.server.pojo.ddo.example.ExampleInfoDO;
-import com.example.boot.server.pojo.ddo.test.TestInfoDO;
+import com.example.boot.server.pojo.dos.example.ExampleInfoDO;
+import com.example.boot.server.pojo.dos.test.TestInfoDO;
 import com.example.boot.server.pojo.dto.ExampleInfoDTO;
 import com.example.boot.server.pojo.dto.TestInfoDTO;
 import com.example.boot.server.pojo.dto.UserInfoDTO;
@@ -14,11 +14,14 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author LiaoWei
+ */
 @Slf4j
 @RestController
 public class UserInfo {
-    private ExampleInfoService exampleInfoService;
-    private TestInfoService testInfoService;
+    final private ExampleInfoService exampleInfoService;
+    final private TestInfoService testInfoService;
 
     public UserInfo(ExampleInfoService exampleInfoService, TestInfoService testInfoService ) {
         this.exampleInfoService = exampleInfoService;

@@ -1,20 +1,42 @@
 package com.example.boot.server.service;
 
-import com.example.boot.server.pojo.ddo.test.TestInfoDO;
+import com.example.boot.server.pojo.dos.test.TestInfoDO;
 
 import java.util.List;
 
 /**
- * @author liaowei
+ * @author LiaoWei
  */
 public interface TestInfoService {
-    public void saveTestInfo(TestInfoDO TestInfoDO);
+    /**
+     * 保存信息
+     * @param testInfoDO
+     */
+    void saveTestInfo(TestInfoDO testInfoDO);
 
-    public void updateTestInfo(TestInfoDO TestInfoDO);
+    /**
+     * 更新信息
+     * @param testInfoDO
+     */
+    void updateTestInfo(TestInfoDO testInfoDO);
 
-    public void deleteTestInfo(Integer id);
+    /**
+     * 删除信息
+     * @param id
+     */
+    void deleteTestInfo(Integer id);
 
-    public TestInfoDO queryTestInfoById(Integer id);
+    /**
+     * 查询信息
+     * @param id
+     * @return
+     */
+    TestInfoDO queryTestInfoById(Integer id);
 
-    public List<TestInfoDO> queryTestInfoList(TestInfoDO TestInfoDO);
+    /**
+     * 查询信息列表
+     * @param testInfoDO
+     * @return
+     */
+    List<TestInfoDO> queryTestInfoList(TestInfoDO testInfoDO);
 }

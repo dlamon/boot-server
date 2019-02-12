@@ -1,9 +1,12 @@
 package com.example.boot.server.dao.test;
 
-import com.example.boot.server.pojo.ddo.test.TestInfoDO;
-import com.example.boot.server.util.MybatisMapper;
+import com.example.boot.server.pojo.dos.test.TestInfoDO;
 import org.springframework.stereotype.Repository;
+import tk.mybatis.mapper.common.Mapper;
 
+/**
+ * @author LiaoWei
+ */
 @Repository
-public interface TestInfoDao extends MybatisMapper<TestInfoDO> {
+public interface TestInfoDao extends Mapper<TestInfoDO> {
 }

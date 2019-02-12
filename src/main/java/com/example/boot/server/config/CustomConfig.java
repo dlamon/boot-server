@@ -3,9 +3,12 @@ package com.example.boot.server.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author LiaoWei
+ */
 @Component
 @ConfigurationProperties(prefix="com.example")
-public class Config {
+public class CustomConfig {
     private String env;
     private String hello;
     private String world;

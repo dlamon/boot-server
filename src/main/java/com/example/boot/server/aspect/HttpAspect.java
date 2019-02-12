@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author LiaoWei
+ */
 @Aspect
 @Slf4j
 @Component
@@ -25,19 +28,25 @@ public class HttpAspect {
     @Before("log()")
     public void doBefore(JoinPoint joinPoint) {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = attributes.getRequest();
-        Map<String, Object> requestMap = new HashMap<String, Object>(5);
-        requestMap.put("url", request.getRequestURL());
-        requestMap.put("method", request.getMethod());
-        requestMap.put("ip", request.getRemoteAddr());
-        requestMap.put("call", joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
-        requestMap.put("args", joinPoint.getArgs());
-        log.info("request:{}", JSON.toJSONString(requestMap));
+        if (attributes == null) {
+            log.debug("HttpAspect attributes is null");
+        } else if (log.isDebugEnabled()) {
+            HttpServletRequest request = attributes.getRequest();
+            Map<String, Object> requestMap = new HashMap(5);
+            requestMap.put("url", request.getRequestURL());
+            requestMap.put("method", request.getMethod());
+            requestMap.put("ip", request.getRemoteAddr());
+            requestMap.put("call", joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
+            requestMap.put("args", joinPoint.getArgs());
+            log.debug("request:{}", JSON.toJSONString(requestMap));
+        }
+
     }
 
     @AfterReturning(returning = "object", pointcut = "log()")
     public void doAfterReturning(Object object) {
-        log.info("response:{}", JSON.toJSONString(object));
+        if (log.isDebugEnabled()) {
+            log.debug("response:{}", JSON.toJSONString(object));
+        }
     }
-
 }

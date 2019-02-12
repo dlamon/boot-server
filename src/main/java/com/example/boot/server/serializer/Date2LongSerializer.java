@@ -1,17 +1,19 @@
-package com.example.boot.server.util.SerializeUtil;
+package com.example.boot.server.serializer;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
 import java.io.IOException;
 import java.util.Date;
 
+/**
+ * @author LiaoWei
+ */
 public class Date2LongSerializer extends JsonSerializer<Date> {
 
     @Override
-    public void serialize(Date date, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
+    public void serialize(Date date, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
         jsonGenerator.writeNumber(date.getTime());
     }
 }

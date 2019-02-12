@@ -8,7 +8,7 @@ import java.util.Locale;
 
 /**
  * 如果需要实现多语言配置，仅仅需要将i18n目录中messages.properties更改为messages_zh_CN.properties
- * @author liaowei
+ * @author LiaoWei
  */
 @Component
 public class MessageUtil {

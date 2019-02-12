@@ -12,6 +12,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import tk.mybatis.spring.annotation.MapperScan;
 
+/**
+ * @author LiaoWei
+ */
 @Configuration
 @MapperScan(basePackages="com.example.boot.server.dao.test", sqlSessionTemplateRef="testSqlSessionTemplate" )
 public class TestDataSourceConfig {
@@ -35,7 +38,7 @@ public class TestDataSourceConfig {
     }
 
     @Bean("testSqlSessionTemplate")
-    public SqlSessionTemplate sqlSessionTemplate(@Qualifier("testSqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception{
+    public SqlSessionTemplate sqlSessionTemplate(@Qualifier("testSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 }

@@ -8,7 +8,7 @@ server:
 logging:
   file: ./logs/server.log
   level:
-    com.example.bootserver: DEBUG
+    com.example.boot.server: DEBUG
 
 spring:
   datasource:

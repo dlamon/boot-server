@@ -1,8 +1,9 @@
 package com.example.boot.server.exception;
 
+/**
+ * @author LiaoWei
+ */
 public class BootException extends Exception {
-    private static final long serialVersionUID = -3098531013726988040L;
-
     private String code;
     private String message;
 

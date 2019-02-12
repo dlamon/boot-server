@@ -3,11 +3,14 @@
 <generatorConfiguration>
     <context id="example" targetRuntime="MyBatis3Simple" defaultModelType="flat">
         <property name="javaFileEncoding" value="UTF-8" />
-        <property name="beginningDelimiter" value="`" />
-        <property name="endingDelimiter" value="`" />
 
         <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
-            <property name="mappers" value="com.example.boot.server.util.MybatisMapper" />
+            <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
+            <property name="caseSensitive" value="true"/>
+            <property name="forceAnnotation" value="true"/>
+            <property name="beginningDelimiter" value="`"/>
+            <property name="endingDelimiter" value="`"/>
+            <property name="lombok" value="Data"/>
         </plugin>
 
         <commentGenerator>
@@ -18,7 +21,7 @@
         <!-- <jdbcConnection driverClass="com.mysql.jdbc.Driver" -->
         <jdbcConnection
                 driverClass="com.mysql.jdbc.Driver"
-                connectionURL="jdbc:mysql://www.liaowei.net.cn:3306/example?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false"
+                connectionURL="jdbc:mysql://www.liaowei.net.cn:3306/test?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false"
                 userId="root"
                 password="root123"
         />
@@ -28,8 +31,8 @@
         </javaTypeResolver>
 
         <javaModelGenerator
-                targetPackage="com.example.boot.server.pojo.ddo.example"
-                targetProject="src/main/java"
+                targetPackage="com.example.boot.server.pojo.dos.test"
+                targetProject="src/test/generator"
         >
             <property name="constructorBased" value="false" />
             <!-- <property name="rootClass" value="com.mars.ssm.impl.dao.BaseEntity" /> -->
@@ -37,24 +40,24 @@
         </javaModelGenerator>
 
         <sqlMapGenerator
-                targetPackage="dao.example"
-                targetProject="src/main/resources"
+                targetPackage="dao.test"
+                targetProject="src/test/generator"
         >
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <javaClientGenerator
                 type="XMLMAPPER"
-                targetPackage="com.example.boot.server.dao.example"
-                targetProject="src/main/java"
+                targetPackage="com.example.boot.server.dao.test"
+                targetProject="src/test/generator"
         >
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
         <table
-                tableName="example_info"
-                domainObjectName="ExampleInfoDO"
-                mapperName="ExampleInfoDao"
+                tableName="test_info"
+                domainObjectName="TestInfoDO"
+                mapperName="TestInfoDao"
         />
 
     </context>

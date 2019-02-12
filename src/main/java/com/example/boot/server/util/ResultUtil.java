@@ -3,7 +3,7 @@ package com.example.boot.server.util;
 import com.example.boot.server.pojo.vo.ResultVO;
 
 /**
- * @author liaowei
+ * @author LiaoWei
  */
 public class ResultUtil {
     public static <E> ResultVO<E> success(E e) {

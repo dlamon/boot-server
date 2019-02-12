@@ -13,6 +13,9 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import tk.mybatis.spring.annotation.MapperScan;
 
+/**
+ * @author LiaoWei
+ */
 @Configuration
 @MapperScan(basePackages="com.example.boot.server.dao.example", sqlSessionTemplateRef="exampleSqlSessionTemplate" )
 public class ExampleDataSourceConfig {
@@ -37,7 +40,7 @@ public class ExampleDataSourceConfig {
     }
 
     @Bean("exampleSqlSessionTemplate")
-    public SqlSessionTemplate sqlSessionTemplate(@Qualifier("exampleSqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception{
+    public SqlSessionTemplate sqlSessionTemplate(@Qualifier("exampleSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 }
