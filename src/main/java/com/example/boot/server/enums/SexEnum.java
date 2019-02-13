@@ -21,16 +21,4 @@ public enum SexEnum {
     private final String key;
     @Getter
     private final String value;
-
-    public static String getValueByKey(String key) {
-        if(null == key) {
-            return "";
-        }
-        for(SexEnum temp: SexEnum.values()) {
-            if(temp.getKey().equals(key)){
-                return temp.getValue();
-            }
-        }
-        return "";
-    }
 }

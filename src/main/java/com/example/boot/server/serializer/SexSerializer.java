@@ -13,7 +13,13 @@ import java.io.IOException;
 public class SexSerializer extends JsonSerializer<String> {
     @Override
     public void serialize(String sex, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-        String result = SexEnum.getValueByKey(sex);
-        jsonGenerator.writeString(result);
+        if (SexEnum.MALE.getKey().equals(sex)) {
+            jsonGenerator.writeString(SexEnum.MALE.getValue());
+        } else if (SexEnum.FEMALE.getKey().equals(sex)) {
+            jsonGenerator.writeString(SexEnum.FEMALE.getValue());
+        } else {
+            jsonGenerator.writeString("");
+        }
+
     }
 }

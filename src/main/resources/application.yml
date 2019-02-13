@@ -59,6 +59,12 @@ mapper:
   not-empty: false
   identity: MYSQL
 
+mybatis:
+  configuration:
+    local-cache-scope: statement
+    jdbc-type-for-null: NULL
+    default-statement-timeout: 15
+
 pagehelper:
   helperDialect: mysql
   reasonable: true

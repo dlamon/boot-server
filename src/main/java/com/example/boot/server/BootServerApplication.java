@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author LiaoWei
  */
 @SpringBootApplication
+//@EnableTransactionManagement
 public class BootServerApplication {
 
     public static void main(String[] args) {

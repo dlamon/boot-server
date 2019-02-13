@@ -32,7 +32,7 @@ public class HttpAspect {
             log.debug("HttpAspect attributes is null");
         } else if (log.isDebugEnabled()) {
             HttpServletRequest request = attributes.getRequest();
-            Map<String, Object> requestMap = new HashMap(5);
+            Map<String, Object> requestMap = new HashMap<>(5);
             requestMap.put("url", request.getRequestURL());
             requestMap.put("method", request.getMethod());
             requestMap.put("ip", request.getRemoteAddr());

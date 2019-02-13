@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.boot.server.dao.client.InfoDao">
+  <resultMap id="BaseResultMap" type="com.example.boot.server.pojo.dos.client.InfoDO">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="client_no" jdbcType="VARCHAR" property="clientNo" />
+    <result column="id_no" jdbcType="VARCHAR" property="idNo" />
+    <result column="birth_date" jdbcType="DATE" property="birthDate" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+</mapper>
