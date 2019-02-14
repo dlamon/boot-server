@@ -3,7 +3,7 @@ package com.example.boot.server.exception;
 /**
  * @author LiaoWei
  */
-public class BootException extends Exception {
+public class BootException extends RuntimeException {
     private String code;
     private String message;
 
