@@ -1,6 +1,7 @@
 package com.example.boot.server.dao.account;
 
 import com.example.boot.server.pojo.dos.account.DetailDO;
+import com.github.pagehelper.PageRowBounds;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.RowBounds;
 import org.junit.Assert;
@@ -76,12 +77,12 @@ public class DetailDaoTest {
 
         List<DetailDO> detailDOList = detailDao.selectByRowBounds(null, new RowBounds(0, 10));
         Assert.assertNotNull(detailDOList);
-        log.debug("RowBounds: 0-10");
         detailDOList.forEach(detailDO -> log.debug("{}", detailDO));
 
-        detailDOList = detailDao.selectByRowBounds(null, new RowBounds(10, 10));
+        PageRowBounds pageRowBounds = new PageRowBounds(10, 10);
+        detailDOList = detailDao.selectByRowBounds(null, pageRowBounds);
         Assert.assertNotNull(detailDOList);
-        log.debug("RowBounds: 11-20");
+        log.debug("offset: {}, count: {}, limit: {}, total: {}", pageRowBounds.getOffset(), pageRowBounds.getCount(), pageRowBounds.getLimit(), pageRowBounds.getTotal());
         detailDOList.forEach(detailDO -> log.debug("{}", detailDO));
     }
 }

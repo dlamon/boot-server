@@ -1,6 +1,7 @@
 package com.example.boot.server.dao.account;
 
 import com.example.boot.server.pojo.dos.account.MasterDO;
+import com.github.pagehelper.PageRowBounds;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.RowBounds;
 import org.junit.Assert;
@@ -79,12 +80,12 @@ public class MasterDaoTest {
 
         List<MasterDO> masterDOList = masterDao.selectByRowBounds(null, new RowBounds(0, 10));
         Assert.assertNotNull(masterDOList);
-        log.debug("RowBounds: 0-10");
         masterDOList.forEach(masterDO -> log.debug("{}", masterDO));
 
-        masterDOList = masterDao.selectByRowBounds(null, new RowBounds(10, 10));
+        PageRowBounds pageRowBounds = new PageRowBounds(10, 10);
+        masterDOList = masterDao.selectByRowBounds(null, pageRowBounds);
         Assert.assertNotNull(masterDOList);
-        log.debug("RowBounds: 11-20");
+        log.debug("offset: {}, count: {}, limit: {}, total: {}", pageRowBounds.getOffset(), pageRowBounds.getCount(), pageRowBounds.getLimit(), pageRowBounds.getTotal());
         masterDOList.forEach(masterDO -> log.debug("{}", masterDO));
     }
 }

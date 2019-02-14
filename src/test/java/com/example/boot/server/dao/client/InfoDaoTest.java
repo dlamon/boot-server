@@ -1,6 +1,7 @@
 package com.example.boot.server.dao.client;
 
 import com.example.boot.server.pojo.dos.client.InfoDO;
+import com.github.pagehelper.PageRowBounds;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.RowBounds;
 import org.junit.Assert;
@@ -84,12 +85,12 @@ public class InfoDaoTest {
 
         List<InfoDO> infoDOList = infoDao.selectByRowBounds(null, new RowBounds(0, 10));
         Assert.assertNotNull(infoDOList);
-        log.debug("RowBounds: 0-10");
         infoDOList.forEach(infoDO -> log.debug("{}", infoDO));
 
-        infoDOList = infoDao.selectByRowBounds(null, new RowBounds(10, 10));
+        PageRowBounds pageRowBounds = new PageRowBounds(10, 10);
+        infoDOList = infoDao.selectByRowBounds(null, pageRowBounds);
         Assert.assertNotNull(infoDOList);
-        log.debug("RowBounds: 11-20");
+        log.debug("offset: {}, count: {}, limit: {}, total: {}", pageRowBounds.getOffset(), pageRowBounds.getCount(), pageRowBounds.getLimit(), pageRowBounds.getTotal());
         infoDOList.forEach(infoDO -> log.debug("{}", infoDO));
     }
 }
