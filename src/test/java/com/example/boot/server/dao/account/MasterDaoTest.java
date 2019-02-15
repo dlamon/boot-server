@@ -1,9 +1,7 @@
 package com.example.boot.server.dao.account;
 
 import com.example.boot.server.pojo.dos.account.MasterDO;
-import com.github.pagehelper.PageRowBounds;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.session.RowBounds;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -15,7 +13,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @RunWith(SpringRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -50,42 +47,28 @@ public class MasterDaoTest {
     }
 
     @Test
-    public void updateByPrimaryKeySelective() {
+    public void updateByPrimaryKey() {
         this.insert();
-        MasterDO masterDO = new MasterDO();
-        masterDO.setAcctNo("6228671133331111");
-        List<MasterDO> masterDOList = masterDao.select(masterDO);
-        Assert.assertEquals(1, masterDOList.size());
-        masterDO = masterDOList.get(0);
-        masterDO.setAcctStatus(Short.valueOf("1"));
+        MasterDO masterDO = masterDao.selectByPrimaryKey("6228671133331111");
+        masterDO.setBalance(new BigDecimal("333.35"));
         int result = masterDao.updateByPrimaryKey(masterDO);
         Assert.assertEquals(1, result);
     }
 
     @Test
-    public void selectOne() {
+    public void updateByPrimaryKeySelective() {
         this.insert();
-        this.insertSelective();
         MasterDO masterDO = new MasterDO();
         masterDO.setAcctNo("6228671133331111");
-        MasterDO result = masterDao.selectOne(masterDO);
-        Assert.assertNotNull(result);
+        masterDO.setBalance(new BigDecimal("333.36"));
+        int result = masterDao.updateByPrimaryKeySelective(masterDO);
+        Assert.assertEquals(1, result);
     }
 
     @Test
-    public void selectByRowBounds() {
-        for (int i = 0; i < 15; i++) {
-            this.insert();
-        }
-
-        List<MasterDO> masterDOList = masterDao.selectByRowBounds(null, new RowBounds(0, 10));
-        Assert.assertNotNull(masterDOList);
-        masterDOList.forEach(masterDO -> log.debug("{}", masterDO));
-
-        PageRowBounds pageRowBounds = new PageRowBounds(10, 10);
-        masterDOList = masterDao.selectByRowBounds(null, pageRowBounds);
-        Assert.assertNotNull(masterDOList);
-        log.debug("offset: {}, count: {}, limit: {}, total: {}", pageRowBounds.getOffset(), pageRowBounds.getCount(), pageRowBounds.getLimit(), pageRowBounds.getTotal());
-        masterDOList.forEach(masterDO -> log.debug("{}", masterDO));
+    public void selectByPrimaryKey() {
+        this.insert();
+        MasterDO masterDO = masterDao.selectByPrimaryKey("6228671133331111");
+        Assert.assertNotNull(masterDO);
     }
 }

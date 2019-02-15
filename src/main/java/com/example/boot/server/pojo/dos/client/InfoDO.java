@@ -1,55 +1,35 @@
 package com.example.boot.server.pojo.dos.client;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * @author LiaoWei
- */
+* Created by Mybatis Generator on 2019/02/15
+* It's automatically generated, do not modify
+* @author LiaoWei
+*/
 @Data
-@Table(name = "`info`")
+@NoArgsConstructor
+@AllArgsConstructor
 public class InfoDO {
-    @Id
-    @Column(name = "`id`")
-    private Integer id;
-
-    /**
-     * 客户编号
-     */
-    @Column(name = "`client_no`")
+    /** 客户编号 */
     private String clientNo;
 
-    /**
-     * 身份证号
-     */
-    @Column(name = "`id_no`")
+    /** 身份证号 */
     private String idNo;
 
-    /**
-     * 出生日期
-     */
-    @Column(name = "`birth_date`")
+    /** 出生日期 */
     private Date birthDate;
 
-    /**
-     * 性别 1-男 2-女
-     */
-    @Column(name = "`sex`")
+    /** 性别 1-男 2-女 */
     private String sex;
 
-    /**
-     * 创建时间
-     */
-    @Column(name = "`create_time`")
+    /** 创建时间 */
     private Date createTime;
 
-    /**
-     * 修改时间
-     */
-    @Column(name = "`update_time`")
+    /** 修改时间 */
     private Date updateTime;
 }

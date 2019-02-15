@@ -1,62 +1,39 @@
 package com.example.boot.server.pojo.dos.account;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * @author LiaoWei
- */
+* Created by Mybatis Generator on 2019/02/15
+* It's automatically generated, do not modify
+* @author LiaoWei
+*/
 @Data
-@Table(name = "`master`")
+@NoArgsConstructor
+@AllArgsConstructor
 public class MasterDO {
-    @Id
-    @Column(name = "`id`")
-    private Integer id;
-
-    /**
-     * 账户编号
-     */
-    @Column(name = "`acct_no`")
+    /** 账户编号 */
     private String acctNo;
 
-    /**
-     * 账户状态 0-正常 1-异常
-     */
-    @Column(name = "`acct_status`")
+    /** 账户状态 0-正常 1-异常 */
     private Short acctStatus;
 
-    /**
-     * 客户编号
-     */
-    @Column(name = "`client_no`")
+    /** 客户编号 */
     private String clientNo;
 
-    /**
-     * 账户余额
-     */
-    @Column(name = "`balance`")
+    /** 账户余额 */
     private BigDecimal balance;
 
-    /**
-     * 备注
-     */
-    @Column(name = "`remark`")
+    /** 备注 */
     private String remark;
 
-    /**
-     * 创建时间
-     */
-    @Column(name = "`create_time`")
+    /** 创建时间 */
     private Date createTime;
 
-    /**
-     * 修改时间
-     */
-    @Column(name = "`update_time`")
+    /** 修改时间 */
     private Date updateTime;
 }

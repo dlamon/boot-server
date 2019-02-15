@@ -61,7 +61,7 @@ mapper:
 
 mybatis:
   configuration:
-    local-cache-scope: statement
+    local-cache-scope: STATEMENT
     jdbc-type-for-null: NULL
     default-statement-timeout: 15
 

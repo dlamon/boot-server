@@ -1,50 +1,33 @@
 package com.example.boot.server.pojo.dos.account;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * @author LiaoWei
- */
+* Created by Mybatis Generator on 2019/02/15
+* It's automatically generated, do not modify
+* @author LiaoWei
+*/
 @Data
-@Table(name = "`detail`")
+@NoArgsConstructor
+@AllArgsConstructor
 public class DetailDO {
-    @Id
-    @Column(name = "`id`")
-    private Integer id;
-
-    /**
-     * 账户编号
-     */
-    @Column(name = "`acct_no`")
+    /** 账户编号 */
     private String acctNo;
 
-    /**
-     * 发生金额
-     */
-    @Column(name = "`amount`")
+    /** 发生金额 */
     private BigDecimal amount;
 
-    /**
-     * 账户余额
-     */
-    @Column(name = "`balance`")
+    /** 账户余额 */
     private BigDecimal balance;
 
-    /**
-     * 用途
-     */
-    @Column(name = "`use`")
-    private String use;
+    /** 用途 */
+    private String uses;
 
-    /**
-     * 创建时间
-     */
-    @Column(name = "`create_time`")
+    /** 创建时间 */
     private Date createTime;
 }

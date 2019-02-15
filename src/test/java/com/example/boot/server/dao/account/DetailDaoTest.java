@@ -1,9 +1,7 @@
 package com.example.boot.server.dao.account;
 
 import com.example.boot.server.pojo.dos.account.DetailDO;
-import com.github.pagehelper.PageRowBounds;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.session.RowBounds;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -15,7 +13,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @RunWith(SpringRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -33,7 +30,7 @@ public class DetailDaoTest {
         detailDO.setAcctNo("6228671133331111");
         detailDO.setAmount(new BigDecimal("100.11"));
         detailDO.setBalance(new BigDecimal("200.11"));
-        detailDO.setUse("信用卡还款");
+        detailDO.setUses("信用卡还款");
         int result = detailDao.insert(detailDO);
         Assert.assertEquals(1, result);
     }
@@ -41,10 +38,19 @@ public class DetailDaoTest {
     @Test
     public void insertSelective() {
         DetailDO detailDO = new DetailDO();
-        detailDO.setAcctNo("6228671133331111");
+        detailDO.setAcctNo("6228671133331112");
         detailDO.setAmount(new BigDecimal("200.99"));
         detailDO.setBalance(new BigDecimal("300.22"));
         int result = detailDao.insertSelective(detailDO);
+        Assert.assertEquals(1, result);
+    }
+
+    @Test
+    public void update() {
+        this.insert();
+        DetailDO detailDO = detailDao.selectByPrimaryKey("6228671133331111");
+        detailDO.setBalance(new BigDecimal("300.33"));
+        int result = detailDao.updateByPrimaryKey(detailDO);
         Assert.assertEquals(1, result);
     }
 
@@ -53,36 +59,15 @@ public class DetailDaoTest {
         this.insert();
         DetailDO detailDO = new DetailDO();
         detailDO.setAcctNo("6228671133331111");
-        List<DetailDO> detailDOList = detailDao.select(detailDO);
-        Assert.assertEquals(1, detailDOList.size());
-        int result = detailDao.updateByPrimaryKeySelective(detailDOList.get(0));
+        detailDO.setBalance(new BigDecimal("333.44"));
+        int result = detailDao.updateByPrimaryKeySelective(detailDO);
         Assert.assertEquals(1, result);
     }
 
     @Test
-    public void select() {
+    public void selectByPrimaryKey() {
         this.insert();
-        this.insertSelective();
-        DetailDO detailDO = new DetailDO();
-        detailDO.setAcctNo("6228671133331111");
-        List<DetailDO> result = detailDao.select(detailDO);
-        Assert.assertTrue(result.size() > 1);
-    }
-
-    @Test
-    public void selectByRowBounds() {
-        for (int i = 0; i < 15; i++) {
-            this.insert();
-        }
-
-        List<DetailDO> detailDOList = detailDao.selectByRowBounds(null, new RowBounds(0, 10));
-        Assert.assertNotNull(detailDOList);
-        detailDOList.forEach(detailDO -> log.debug("{}", detailDO));
-
-        PageRowBounds pageRowBounds = new PageRowBounds(10, 10);
-        detailDOList = detailDao.selectByRowBounds(null, pageRowBounds);
-        Assert.assertNotNull(detailDOList);
-        log.debug("offset: {}, count: {}, limit: {}, total: {}", pageRowBounds.getOffset(), pageRowBounds.getCount(), pageRowBounds.getLimit(), pageRowBounds.getTotal());
-        detailDOList.forEach(detailDO -> log.debug("{}", detailDO));
+        DetailDO detailDO = detailDao.selectByPrimaryKey("6228671133331111");
+        Assert.assertNotNull(detailDO);
     }
 }
