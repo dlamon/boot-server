@@ -44,30 +44,4 @@ public class DetailDaoTest {
         int result = detailDao.insertSelective(detailDO);
         Assert.assertEquals(1, result);
     }
-
-    @Test
-    public void update() {
-        this.insert();
-        DetailDO detailDO = detailDao.selectByPrimaryKey("6228671133331111");
-        detailDO.setBalance(new BigDecimal("300.33"));
-        int result = detailDao.updateByPrimaryKey(detailDO);
-        Assert.assertEquals(1, result);
-    }
-
-    @Test
-    public void updateByPrimaryKeySelective() {
-        this.insert();
-        DetailDO detailDO = new DetailDO();
-        detailDO.setAcctNo("6228671133331111");
-        detailDO.setBalance(new BigDecimal("333.44"));
-        int result = detailDao.updateByPrimaryKeySelective(detailDO);
-        Assert.assertEquals(1, result);
-    }
-
-    @Test
-    public void selectByPrimaryKey() {
-        this.insert();
-        DetailDO detailDO = detailDao.selectByPrimaryKey("6228671133331111");
-        Assert.assertNotNull(detailDO);
-    }
 }

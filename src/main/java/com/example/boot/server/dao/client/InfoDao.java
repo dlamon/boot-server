@@ -4,7 +4,7 @@ import com.example.boot.server.pojo.dos.client.InfoDO;
 import org.springframework.stereotype.Repository;
 
 /**
-* Created by Mybatis Generator on 2019/02/15
+* Created by Mybatis Generator on 2019/02/19
 * It's automatically generated, do not modify
 * @author LiaoWei
 */

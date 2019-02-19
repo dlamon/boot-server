@@ -1,35 +1,45 @@
 package com.example.boot.server.service;
 
+import com.example.boot.server.pojo.dos.account.DetailDO;
 import com.example.boot.server.pojo.dos.account.MasterDO;
-import com.example.boot.server.pojo.dto.AcctDTO;
-import com.github.pagehelper.PageRowBounds;
+import com.example.boot.server.pojo.dto.AcctQueryDTO;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.util.List;
 
 /**
  * @author LiaoWei
  */
 public interface AcctService {
     /**
+     * 查询账户主要信息
+     */
+    MasterDO getMasterInfo(String acctNo);
+
+    /**
+     * 查询账户详细信息
+     */
+    List<DetailDO> listDetailInfo(String acctNo);
+
+    /**
      * 新增账户
      */
-    void addAccount(MasterDO masterDO);
+    void saveAccount(MasterDO masterDO);
 
     /**
      * 更改账户状态
      */
-    void changeStatus(String acctNo, Short acctStatus);
+    void updateStatus(String acctNo, Short acctStatus);
 
     /**
      * 更改账户关联的客户号
      */
-    void changeClientId(String acctNo, String clientNo);
+    void updateClientId(String acctNo, String clientNo);
 
     /**
      * 更改账户备注
      */
-    void changeRemark(String acctNo, String remark);
+    void updateRemark(String acctNo, String remark);
 
     /**
      * 存款
@@ -41,8 +51,9 @@ public interface AcctService {
      */
     void withdrawal(String acctNo, BigDecimal amount, String use);
 
+
     /**
-     * 查询账户明细
+     * 综合查询
      */
-    AcctDTO query(String acctNo, Date beginDate, Date endDate, BigDecimal maxAmount, BigDecimal minAmount, PageRowBounds bounds);
+    AcctQueryDTO queryComplex(AcctQueryDTO acctQueryDTO);
 }

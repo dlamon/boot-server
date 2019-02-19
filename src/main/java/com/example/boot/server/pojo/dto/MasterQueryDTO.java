@@ -1,21 +1,15 @@
-package com.example.boot.server.pojo.dos.account;
+package com.example.boot.server.pojo.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
 /**
-* Created by Mybatis Generator on 2019/02/19
-* It's automatically generated, do not modify
-* @author LiaoWei
-*/
+ * @author LiaoWei
+ */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class MasterDO {
+public class MasterQueryDTO {
     /** 账户编号 */
     private String acctNo;
 
@@ -28,12 +22,21 @@ public class MasterDO {
     /** 账户余额 */
     private BigDecimal balance;
 
-    /** 备注 */
-    private String remark;
-
     /** 创建时间 */
     private Date createTime;
 
     /** 修改时间 */
     private Date updateTime;
+
+    /** 排序字段 */
+    private String sort;
+
+    /** 排序方式 */
+    private String order;
+
+    /** 分页偏移量 */
+    private Integer pageNum;
+
+    /** 单页最大条数 */
+    private Integer pageSize;
 }

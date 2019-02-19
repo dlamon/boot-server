@@ -1,10 +1,14 @@
 package com.example.boot.server.exception;
 
+import lombok.Getter;
+
 /**
  * @author LiaoWei
  */
 public class BootException extends RuntimeException {
+    @Getter
     private String code;
+    @Getter
     private String message;
 
     public BootException(Throwable cause) {
@@ -31,14 +35,5 @@ public class BootException extends RuntimeException {
         super(code + "-" + message, cause);
         this.code = code;
         this.message = message;
-    }
-
-    String getCode() {
-        return code;
-    }
-
-    @Override
-    public String getMessage() {
-        return message;
     }
 }

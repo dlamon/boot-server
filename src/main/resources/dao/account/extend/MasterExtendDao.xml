@@ -32,22 +32,25 @@
         select
         <include refid="Base_Column_List" />
         from master
-        <if test="acct_status != null or client_no != null or balance != null or create_time != null or update_time != null">
+        <if test="acctNo!=null or acctStatus != null or clientNo != null or balance != null or createTime != null or updateTime != null">
         <where>
-            <if test="acct_status != null">
-              and acct_status = '${acct_status}'
+            <if test="acctNo != null">
+                and acct_No = #{acctNo,jdbcType=VARCHAR}
             </if>
-            <if test="client_no != null">
-              and client_no = '${client_no}'
+            <if test="acctStatus != null">
+              and acct_status = #{acctStatus,jdbcType=VARCHAR}
             </if>
-            <if test="client_no != null">
-              and balance > '${balance}'
+            <if test="clientNo != null">
+              and client_no = #{clientNo,jdbcType=VARCHAR}
             </if>
-            <if test="create_time != null">
-              and create_time > '${create_time}'
+            <if test="balance != null">
+              and balance > #{balance,jdbcType=DECIMAL}
             </if>
-            <if test="update_time != null">
-              and update_time > '${update_time}'
+            <if test="createTime != null">
+              and  create_time > #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+              and updateTime > #{updateTime,jdbcType=TIMESTAMP}
             </if>
         </where>
         </if>
