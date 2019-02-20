@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -73,6 +74,8 @@ public class AcctServiceImpl implements AcctService {
         }
         // 更新账户状态
         masterDO.setAcctStatus(acctStatus);
+        // 更改更新时间
+        masterDO.setUpdateTime(new Date());
         int rows = masterDao.updateByPrimaryKey(masterDO);
         if (rows != 1) {
             throw new BootException("ACT0004");
@@ -88,6 +91,8 @@ public class AcctServiceImpl implements AcctService {
         }
         // 更新账户对应的客户号
         masterDO.setClientNo(clientNo);
+        // 更改更新时间
+        masterDO.setUpdateTime(new Date());
         int rows = masterDao.updateByPrimaryKey(masterDO);
         if (rows != 1) {
             throw new BootException("ACT0005");
@@ -103,6 +108,8 @@ public class AcctServiceImpl implements AcctService {
         }
         // 更新账户备注信息
         masterDO.setRemark(remark);
+        // 更改更新时间
+        masterDO.setUpdateTime(new Date());
         int rows = masterDao.updateByPrimaryKey(masterDO);
         if (rows != 1) {
             throw new BootException("ACT0006");
@@ -126,6 +133,8 @@ public class AcctServiceImpl implements AcctService {
         BigDecimal newBalance = balance.add(amount);
         // 更改主表金额
         masterDO.setBalance(newBalance);
+        // 更改更新时间
+        masterDO.setUpdateTime(new Date());
         int rows = masterDao.updateByPrimaryKey(masterDO);
         if (rows != 1) {
             throw new BootException("ACT0007", "更新数据失败");
@@ -161,6 +170,8 @@ public class AcctServiceImpl implements AcctService {
         // 计算余额
         BigDecimal newBalance = balance.subtract(amount);
         masterDO.setBalance(newBalance);
+        // 更改更新时间
+        masterDO.setUpdateTime(new Date());
         int rows = masterDao.updateByPrimaryKey(masterDO);
         if (rows != 1) {
             throw new BootException("ACT0008", "更新数据失败");

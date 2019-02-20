@@ -44,7 +44,9 @@ public class AcctServiceImplTest {
     public void setUp() throws Exception {
         MasterDO masterDO = new MasterDO("6228671100001111", Short.valueOf("0"), "1234567890", new BigDecimal("100.01"), null, null, null);
         masterDao.insert(masterDO);
-        masterDO = new MasterDO("6228671100001112", Short.valueOf("0"), "1234567891", new BigDecimal("200.01"), null, null, null);
+        masterDO = new MasterDO("6228671100001112", Short.valueOf("1"), "1234567891", new BigDecimal("200.01"), null, null, null);
+        masterDao.insert(masterDO);
+        masterDO = new MasterDO("6228671100001113", Short.valueOf("0"), "1234567892", new BigDecimal("3000"), null, null, null);
         masterDao.insert(masterDO);
 
         LocalDateTime localDateTime = LocalDateTime.of(2015, 10, 17, 8, 8, 8);
@@ -68,21 +70,21 @@ public class AcctServiceImplTest {
     }
 
     @Test
-    public void queryMaster() {
+    public void getMasterInfo() {
         MasterDO masterDO = acctService.getMasterInfo("6228671100001111");
         Assert.assertNotNull(masterDO);
     }
 
     @Test
-    public void queryDetail() {
+    public void listDetailInfo() {
         List<DetailDO> detailDOList = acctService.listDetailInfo("6228671141418888");
         Assert.assertEquals(0, detailDOList.size());
     }
 
     @Test
-    public void addAccount() {
+    public void saveAccount() {
         MasterDO masterDO = new MasterDO();
-        masterDO.setAcctNo("6228671100001113");
+        masterDO.setAcctNo("6228671100001114");
         masterDO.setBalance(new BigDecimal("30000"));
         masterDO.setClientNo("1234567890");
         masterDO.setAcctStatus(Short.valueOf("0"));
@@ -91,27 +93,27 @@ public class AcctServiceImplTest {
 
     @Test
     public void addAccountException() {
-        this.addAccount();
+        this.saveAccount();
         expectedException.expect(new BootExceptionMatcher("ACT0001"));
-        this.addAccount();
+        this.saveAccount();
     }
 
     @Test
-    public void changeStatus() {
+    public void updateStatus() {
         acctService.updateStatus("6228671100001111", Short.valueOf("1"));
         MasterDO masterDO = acctService.getMasterInfo("6228671100001111");
         Assert.assertEquals(1, masterDO.getAcctStatus().shortValue());
     }
 
     @Test
-    public void changeClientId() {
+    public void updateClientId() {
         acctService.updateClientId("6228671100001111", "0987654321");
         MasterDO masterDO = acctService.getMasterInfo("6228671100001111");
         Assert.assertEquals("0987654321", masterDO.getClientNo());
     }
 
     @Test
-    public void changeRemark() {
+    public void updateRemark() {
         acctService.updateRemark("6228671100001111", "主要账户");
         MasterDO masterDO = acctService.getMasterInfo("6228671100001111");
         Assert.assertEquals("主要账户", masterDO.getRemark());
@@ -120,7 +122,7 @@ public class AcctServiceImplTest {
     @Test
     public void deposit_01() {
         expectedException.expect(new BootExceptionMatcher("ACT0002"));
-        acctService.deposit("6228671100001113", new BigDecimal("3000"));
+        acctService.deposit("6228671100001114", new BigDecimal("3000"));
     }
 
     @Test
@@ -132,10 +134,10 @@ public class AcctServiceImplTest {
 
     @Test
     public void deposit_03() {
-        acctService.deposit("6228671100001111", new BigDecimal("3000"));
-        MasterDO masterDO = acctService.getMasterInfo("6228671100001111");
-        Assert.assertEquals(33000, masterDO.getBalance().longValue());
-        List<DetailDO> detailDOList = acctService.listDetailInfo("6228671100001111");
+        acctService.deposit("6228671100001113", new BigDecimal("3000"));
+        MasterDO masterDO = acctService.getMasterInfo("6228671100001113");
+        Assert.assertEquals(6000, masterDO.getBalance().longValue());
+        List<DetailDO> detailDOList = acctService.listDetailInfo("6228671100001113");
         Assert.assertEquals(1, detailDOList.size());
         Assert.assertEquals(3000, detailDOList.get(0).getAmount().intValue());
     }
@@ -143,7 +145,7 @@ public class AcctServiceImplTest {
     @Test
     public void withdrawal_01() {
         expectedException.expect(new BootExceptionMatcher("ACT0002"));
-        acctService.withdrawal("6228671100001113", new BigDecimal("3000"), "信用卡还款");
+        acctService.withdrawal("6228671100001114", new BigDecimal("3000"), "信用卡还款");
     }
 
     @Test
@@ -162,10 +164,10 @@ public class AcctServiceImplTest {
 
     @Test
     public void withdrawal_04() {
-        acctService.withdrawal("6228671100001111", new BigDecimal("3000"), "信用卡还款");
-        MasterDO masterDO = acctService.getMasterInfo("6228671100001111");
-        Assert.assertEquals(27000, masterDO.getBalance().longValue());
-        List<DetailDO> detailDOList = acctService.listDetailInfo("6228671100001111");
+        acctService.withdrawal("6228671100001113", new BigDecimal("3000"), "信用卡还款");
+        MasterDO masterDO = acctService.getMasterInfo("6228671100001113");
+        Assert.assertEquals(0, masterDO.getBalance().longValue());
+        List<DetailDO> detailDOList = acctService.listDetailInfo("6228671100001113");
         Assert.assertEquals(1, detailDOList.size());
         Assert.assertEquals(3000, detailDOList.get(0).getAmount().intValue());
     }
