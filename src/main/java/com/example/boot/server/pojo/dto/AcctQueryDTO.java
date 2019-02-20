@@ -14,10 +14,10 @@ public class AcctQueryDTO {
     String acctNo;
 
     /** 开始时间 */
-    Date beginDate;
+    Date beginTime;
 
     /** 结束时间 */
-    Date endDate;
+    Date endTime;
 
     /** 最大发生金额 */
     BigDecimal maxAmount;

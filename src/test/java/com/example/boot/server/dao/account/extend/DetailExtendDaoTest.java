@@ -53,7 +53,9 @@ public class DetailExtendDaoTest {
         detailDao.insert(detailDO);
         detailDO = new DetailDO("6228671133331111", new BigDecimal("1000"), new BigDecimal("1000"), "交房租", null);
         detailDao.insert(detailDO);
-        detailDO = new DetailDO("6228671133331111", new BigDecimal("300"), new BigDecimal("700"), "交通费", null);
+        localDateTime = LocalDateTime.of(2020, 10, 17, 9, 9, 9);
+        createTime = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+        detailDO = new DetailDO("6228671133331111", new BigDecimal("300"), new BigDecimal("700"), "交通费", createTime);
         detailDao.insert(detailDO);
         detailDO = new DetailDO("6228671133331112", new BigDecimal("333"), new BigDecimal("8000"), "交通讯费", null);
         detailDao.insert(detailDO);
@@ -65,6 +67,7 @@ public class DetailExtendDaoTest {
         detailDao.insert(detailDO);
         detailDO = new DetailDO("6228671133331112", new BigDecimal("3000"), new BigDecimal("5000"), "信用卡还款", null);
         detailDao.insert(detailDO);
+        createTime = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
         detailDO = new DetailDO("6228671133331113", new BigDecimal("8000"), new BigDecimal("10000"), "交房贷", null);
         detailDao.insert(detailDO);
     }
@@ -86,47 +89,66 @@ public class DetailExtendDaoTest {
         detailDOList.forEach(element -> log.debug("{}", element));
         Assert.assertEquals(6, detailDOList.size());
 
-        // 通过账号和发生金额查询
-        log.debug("--- Select All by acctNo, amount ---");
+        // 通过账号和最小发生金额查询
+        log.debug("--- Select All by acctNo, minAmount ---");
         detailQueryDTO = new DetailQueryDTO();
         detailQueryDTO.setAcctNo("6228671133331111");
-        detailQueryDTO.setAmount(new BigDecimal("199"));
+        detailQueryDTO.setMinAmount(new BigDecimal("199"));
         detailDOList = detailExtendDao.selectAllByConditions(detailQueryDTO);
         detailDOList.forEach(element -> log.debug("{}", element));
         Assert.assertEquals(5, detailDOList.size());
 
-        // 通过账号、发生金额和账户余额查询
-        log.debug("--- Select All by acctNo, amount, balance ---");
+        // 通过账号、最小发生金额和最大发生金额查询
+        log.debug("--- Select All by acctNo, minAmount, maxAmount ---");
         detailQueryDTO = new DetailQueryDTO();
         detailQueryDTO.setAcctNo("6228671133331111");
-        detailQueryDTO.setAmount(new BigDecimal("199"));
-        detailQueryDTO.setBalance(new BigDecimal("800"));
+        detailQueryDTO.setMinAmount(new BigDecimal("199"));
+        detailQueryDTO.setMaxAmount(new BigDecimal("2500"));
+        detailDOList = detailExtendDao.selectAllByConditions(detailQueryDTO);
+        detailDOList.forEach(element -> log.debug("{}", element));
+        Assert.assertEquals(5, detailDOList.size());
+
+        // 通过账号、最小发生金额、最大发生金额和开始时间查询
+        log.debug("--- Select All by acctNo, minAmount, maxAmount, beginTime ---");
+        detailQueryDTO = new DetailQueryDTO();
+        detailQueryDTO.setAcctNo("6228671133331111");
+        detailQueryDTO.setMinAmount(new BigDecimal("199"));
+        detailQueryDTO.setMaxAmount(new BigDecimal("2500"));
+        LocalDateTime localDateTime = LocalDateTime.of(2015, 10, 17, 10, 10, 10);
+        Date beginTime = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+        detailQueryDTO.setBeginTime(beginTime);
         detailDOList = detailExtendDao.selectAllByConditions(detailQueryDTO);
         detailDOList.forEach(element -> log.debug("{}", element));
         Assert.assertEquals(4, detailDOList.size());
 
-        // 通过账号、发生金额、账户余额和创建时间查询
-        log.debug("--- Select All by acctNo, amount, balance, createTime ---");
+        // 通过账号、最小发生金额、最大发生金额、开始时间和结束时间查询
+        log.debug("--- Select All by acctNo, minAmount, maxAmount, beginTime, endTime ---");
         detailQueryDTO = new DetailQueryDTO();
         detailQueryDTO.setAcctNo("6228671133331111");
-        detailQueryDTO.setAmount(new BigDecimal("199"));
-        detailQueryDTO.setBalance(new BigDecimal("800"));
-        LocalDateTime localDateTime = LocalDateTime.of(2015, 10, 17, 10, 10, 10);
-        Date createTime = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
-        detailQueryDTO.setCreateTime(createTime);
+        detailQueryDTO.setMinAmount(new BigDecimal("199"));
+        detailQueryDTO.setMaxAmount(new BigDecimal("2500"));
+        localDateTime = LocalDateTime.of(2015, 10, 17, 10, 10, 10);
+        beginTime = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+        detailQueryDTO.setBeginTime(beginTime);
+        localDateTime = LocalDateTime.of(2020, 9, 17, 10, 10, 10);
+        Date endTime = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+        detailQueryDTO.setEndTime(endTime);
         detailDOList = detailExtendDao.selectAllByConditions(detailQueryDTO);
         detailDOList.forEach(element -> log.debug("{}", element));
         Assert.assertEquals(3, detailDOList.size());
 
-        // 通过账号、发生金额、账户余额和创建时间查询, 并按照发生金额倒序排列
-        log.debug("--- Select All by acctNo, amount, balance, createTime order by amount desc ---");
+        // 通过账号、最小发生金额、最大发生金额、开始时间和结束时间查询，按照发生金额倒序排列
+        log.debug("--- Select All by acctNo, minAmount, maxAmount, beginTime, endTime order by amount desc ---");
         detailQueryDTO = new DetailQueryDTO();
         detailQueryDTO.setAcctNo("6228671133331111");
-        detailQueryDTO.setAmount(new BigDecimal("199"));
-        detailQueryDTO.setBalance(new BigDecimal("800"));
+        detailQueryDTO.setMinAmount(new BigDecimal("199"));
+        detailQueryDTO.setMaxAmount(new BigDecimal("2500"));
         localDateTime = LocalDateTime.of(2015, 10, 17, 10, 10, 10);
-        createTime = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
-        detailQueryDTO.setCreateTime(createTime);
+        beginTime = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+        detailQueryDTO.setBeginTime(beginTime);
+        localDateTime = LocalDateTime.of(2020, 9, 17, 10, 10, 10);
+        endTime = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+        detailQueryDTO.setEndTime(endTime);
         detailQueryDTO.setSort("amount");
         detailQueryDTO.setOrder("desc");
         detailDOList = detailExtendDao.selectAllByConditions(detailQueryDTO);
@@ -134,14 +156,17 @@ public class DetailExtendDaoTest {
         Assert.assertEquals(3, detailDOList.size());
 
         // 通过账号、发生金额、账户余额和创建时间查询, 按照发生金额倒序排列, 进行分页查询，一页两条记录
-        log.debug("--- Select All by acctNo, amount, balance, createTime createTime order by amount desc pageNum ---");
+        log.debug("--- Select All by acctNo, minAmount, maxAmount, beginTime, endTime order by amount desc page ---");
         detailQueryDTO = new DetailQueryDTO();
         detailQueryDTO.setAcctNo("6228671133331111");
-        detailQueryDTO.setAmount(new BigDecimal("199"));
-        detailQueryDTO.setBalance(new BigDecimal("800"));
+        detailQueryDTO.setMinAmount(new BigDecimal("199"));
+        detailQueryDTO.setMaxAmount(new BigDecimal("2500"));
         localDateTime = LocalDateTime.of(2015, 10, 17, 10, 10, 10);
-        createTime = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
-        detailQueryDTO.setCreateTime(createTime);
+        beginTime = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+        detailQueryDTO.setBeginTime(beginTime);
+        localDateTime = LocalDateTime.of(2020, 9, 17, 10, 10, 10);
+        endTime = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+        detailQueryDTO.setEndTime(endTime);
         detailQueryDTO.setSort("amount");
         detailQueryDTO.setOrder("desc");
         detailQueryDTO.setPageNum(1);

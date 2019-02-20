@@ -13,14 +13,17 @@ public class DetailQueryDTO {
     /** 账户编号 */
     private String acctNo;
 
-    /** 发生金额 */
-    private BigDecimal amount;
+    /** 最大发生金额 */
+    BigDecimal maxAmount;
 
-    /** 账户余额 */
-    private BigDecimal balance;
+    /** 最小发生金额 */
+    BigDecimal minAmount;
 
-    /** 创建时间 */
-    private Date createTime;
+    /** 开始时间 */
+    Date beginTime;
+
+    /** 结束时间 */
+    Date endTime;
 
     /** 排序字段 */
     private String sort;

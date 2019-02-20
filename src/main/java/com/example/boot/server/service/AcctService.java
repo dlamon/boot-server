@@ -3,6 +3,7 @@ package com.example.boot.server.service;
 import com.example.boot.server.pojo.dos.account.DetailDO;
 import com.example.boot.server.pojo.dos.account.MasterDO;
 import com.example.boot.server.pojo.dto.AcctQueryDTO;
+import com.example.boot.server.pojo.dto.AcctResultDTO;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -55,5 +56,5 @@ public interface AcctService {
     /**
      * 综合查询
      */
-    AcctQueryDTO queryComplex(AcctQueryDTO acctQueryDTO);
+    AcctResultDTO queryComplex(AcctQueryDTO acctQueryDTO);
 }

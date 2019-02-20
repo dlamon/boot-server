@@ -9,8 +9,10 @@ import com.example.boot.server.exception.BootException;
 import com.example.boot.server.pojo.dos.account.DetailDO;
 import com.example.boot.server.pojo.dos.account.MasterDO;
 import com.example.boot.server.pojo.dto.AcctQueryDTO;
+import com.example.boot.server.pojo.dto.AcctResultDTO;
 import com.example.boot.server.pojo.dto.DetailQueryDTO;
 import com.example.boot.server.service.AcctService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -175,7 +177,16 @@ public class AcctServiceImpl implements AcctService {
     }
 
     @Override
-    public AcctQueryDTO queryComplex(AcctQueryDTO acctQueryDTO) {
-        return null;
+    public AcctResultDTO queryComplex(AcctQueryDTO acctQueryDTO) {
+        MasterDO masterDO = this.getMasterInfo(acctQueryDTO.getAcctNo());
+        DetailQueryDTO detailQueryDTO = new DetailQueryDTO();
+        BeanUtils.copyProperties(acctQueryDTO, detailQueryDTO);
+        List<DetailDO> detailDOList= detailExtendDao.selectAllByConditions(detailQueryDTO);
+
+        AcctResultDTO acctResultDTO = new AcctResultDTO();
+        BeanUtils.copyProperties(masterDO, acctResultDTO);
+        acctResultDTO.setAcctDetailList(detailDOList);
+
+        return acctResultDTO;
     }
 }

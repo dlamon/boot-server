@@ -23,20 +23,24 @@
         select
         <include refid="Base_Column_List" />
         from detail
-        <if test="acctNo != null or amount != null or balance != null or createTime != null">
+        <if test="acctNo != null or maxAmount != null or minAmount != null or beginTime != null or endTime !=null">
             <where>
                 <if test="acctNo != null">
                     and acct_no = #{acctNo,jdbcType=VARCHAR}
                 </if>
-                <if test="amount != null">
-                    and amount > #{amount,jdbcType=DECIMAL}
+                <if test="minAmount != null">
+                    and amount &gt; #{minAmount,jdbcType=DECIMAL}
                 </if>
-                <if test="balance != null">
-                    and balance > #{balance,jdbcType=DECIMAL}
+                <if test="maxAmount != null">
+                    and amount &lt; #{maxAmount,jdbcType=DECIMAL}
                 </if>
-                <if test="createTime != null">
-                    and  create_time > #{createTime,jdbcType=TIMESTAMP}
+                <if test="beginTime != null">
+                    and  create_time &gt; #{beginTime,jdbcType=TIMESTAMP}
                 </if>
+                <if test="endTime != null">
+                    and  create_time &lt; #{endTime,jdbcType=TIMESTAMP}
+                </if>
+
             </where>
         </if>
         <trim prefix="order by">
