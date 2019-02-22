@@ -7,8 +7,12 @@ spring:
   messages:
     basename: i18n/messages
     encoding: utf-8
+  mvc:
+      date-format: yyyy-MM-dd HH:mm:ss
   jackson:
     default-property-inclusion: non_null
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
   datasource:
     druid:
       initial-size: 1

@@ -33,6 +33,9 @@ public class AcctResultDTO {
     /** 修改时间 */
     private Date updateTime;
 
+    /** 总数 */
+    private long total;
+
     /** 账户变更详情 */
     List<DetailDO> acctDetailList;
 }

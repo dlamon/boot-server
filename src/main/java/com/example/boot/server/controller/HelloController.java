@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author LiaoWei
  */
-@Slf4j
 @RestController
-public class HelloWorld {
+@Slf4j
+public class HelloController {
     @Value("${com.example.env}")
     private String env;
     private final CustomConfig customConfig;
 
-    public HelloWorld(CustomConfig customConfig) {
+    public HelloController(CustomConfig customConfig) {
         this.customConfig = customConfig;
     }
 
     @RequestMapping("/")
-    public String helloWorld() {
+    public String hello() {
         log.info("current env: {}", env);
         String hello = customConfig.getHello();
         String world = customConfig.getWorld();

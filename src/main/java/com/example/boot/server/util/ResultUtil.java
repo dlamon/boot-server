@@ -18,14 +18,7 @@ public class ResultUtil {
         return success(null);
     }
 
-    public static <E> ResultVO<E> error(String code, String msg) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(MessageUtil.getMessage(code));
-        if(msg != null && !"".equals(msg)) {
-            sb.append("[").append(msg).append("]");
-        }
-        String message = sb.toString();
-
+    public static <E> ResultVO<E> error(String code, String message) {
         ResultVO<E> resultVO = new ResultVO<>();
         resultVO.setCode(code);
         resultVO.setMessage(message);

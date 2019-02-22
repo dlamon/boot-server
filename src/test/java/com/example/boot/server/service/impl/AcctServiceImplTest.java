@@ -176,7 +176,7 @@ public class AcctServiceImplTest {
     public void queryComplex_01() {
         AcctQueryDTO acctQueryDTO = new AcctQueryDTO();
         acctQueryDTO.setAcctNo("6228671100001111");
-        AcctResultDTO acctResultDTO = acctService.queryComplex(acctQueryDTO);
+        AcctResultDTO acctResultDTO = acctService.listComplex(acctQueryDTO);
 
         Assert.assertNotNull(acctResultDTO);
         Assert.assertEquals(6, acctResultDTO.getAcctDetailList().size());
@@ -188,7 +188,7 @@ public class AcctServiceImplTest {
         acctQueryDTO.setAcctNo("6228671100001111");
         acctQueryDTO.setMinAmount(new BigDecimal("110"));
         acctQueryDTO.setMaxAmount(new BigDecimal("999"));
-        AcctResultDTO acctResultDTO = acctService.queryComplex(acctQueryDTO);
+        AcctResultDTO acctResultDTO = acctService.listComplex(acctQueryDTO);
         log.info("{}", acctResultDTO.getAcctDetailList());
 
         Assert.assertNotNull(acctResultDTO);
@@ -207,7 +207,7 @@ public class AcctServiceImplTest {
         localDateTime = LocalDateTime.of(2020, 10, 17, 9, 8, 9);
         Date endTime = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
         acctQueryDTO.setEndTime(endTime);
-        AcctResultDTO acctResultDTO = acctService.queryComplex(acctQueryDTO);
+        AcctResultDTO acctResultDTO = acctService.listComplex(acctQueryDTO);
         log.info("{}", acctResultDTO.getAcctDetailList());
 
         Assert.assertNotNull(acctResultDTO);
@@ -228,7 +228,7 @@ public class AcctServiceImplTest {
         acctQueryDTO.setEndTime(endTime);
         acctQueryDTO.setSort("amount");
         acctQueryDTO.setOrder("desc");
-        AcctResultDTO acctResultDTO = acctService.queryComplex(acctQueryDTO);
+        AcctResultDTO acctResultDTO = acctService.listComplex(acctQueryDTO);
         log.info("{}", acctResultDTO.getAcctDetailList());
 
         Assert.assertNotNull(acctResultDTO);
@@ -252,13 +252,13 @@ public class AcctServiceImplTest {
 
         acctQueryDTO.setPageNum(1);
         acctQueryDTO.setPageSize(1);
-        AcctResultDTO acctResultDTO = acctService.queryComplex(acctQueryDTO);
+        AcctResultDTO acctResultDTO = acctService.listComplex(acctQueryDTO);
         Assert.assertNotNull(acctResultDTO);
         Assert.assertEquals(1, acctResultDTO.getAcctDetailList().size());
 
         acctQueryDTO.setPageNum(2);
         acctQueryDTO.setPageSize(1);
-        acctResultDTO = acctService.queryComplex(acctQueryDTO);
+        acctResultDTO = acctService.listComplex(acctQueryDTO);
         Assert.assertNotNull(acctResultDTO);
         Assert.assertEquals(1, acctResultDTO.getAcctDetailList().size());
     }
