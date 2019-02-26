@@ -22,8 +22,7 @@ public class BootException extends RuntimeException {
         if(message != null && !"".equals(message)) {
             sb.append("[").append(message).append("]");
         }
-        String newMessage = sb.toString();
-        return newMessage;
+        return sb.toString();
     }
 
     public BootException(Throwable cause) {

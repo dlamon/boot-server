@@ -3,6 +3,9 @@ package com.example.boot.server.enums;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/**
+ * @author LiaoWei
+ */
 @AllArgsConstructor
 public enum AcctStatusEnum {
     /**

@@ -27,7 +27,7 @@ public class MasterDaoTest {
     MasterDao masterDao;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         MasterDO masterDO = new MasterDO();
         masterDO.setAcctNo("6228671133331111");
         masterDO.setAcctStatus(Short.valueOf("0"));

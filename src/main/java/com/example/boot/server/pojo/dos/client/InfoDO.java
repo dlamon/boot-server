@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 /**
-* Created by Mybatis Generator on 2019/02/19
+* Created by Mybatis Generator on 2019/02/25
 * It's automatically generated, do not modify
 * @author LiaoWei
 */
@@ -21,11 +21,14 @@ public class InfoDO {
     /** 身份证号 */
     private String idNo;
 
-    /** 出生日期 */
-    private Date birthDate;
+    /** 姓名 */
+    private String name;
 
     /** 性别 1-男 2-女 */
     private String sex;
+
+    /** 出生日期 */
+    private Date birthDate;
 
     /** 创建时间 */
     private Date createTime;

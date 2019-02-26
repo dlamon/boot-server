@@ -59,11 +59,13 @@ public class QueryController {
     public ResultVO<ComplexResultDTO> listComplex(AcctQueryDTO acctQueryDTO) {
         ComplexResultDTO complexResultDTO = new ComplexResultDTO();
         AcctResultDTO acctResultDTO = acctService.listComplex(acctQueryDTO);
-        if (acctResultDTO != null) {
-            BeanUtils.copyProperties(acctResultDTO, complexResultDTO);
-            complexResultDTO.setAcctCreateTime(acctResultDTO.getCreateTime());
-            complexResultDTO.setAcctUpdateTime(acctResultDTO.getUpdateTime());
+        if (acctResultDTO == null) {
+            throw new BootException("ACT0002");
         }
+
+        BeanUtils.copyProperties(acctResultDTO, complexResultDTO);
+        complexResultDTO.setAcctCreateTime(acctResultDTO.getCreateTime());
+        complexResultDTO.setAcctUpdateTime(acctResultDTO.getUpdateTime());
 
         InfoDO infoDO = clientService.getClientInfo(acctResultDTO.getClientNo());
         if (infoDO == null) {

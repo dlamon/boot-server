@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * @author LiaoWei
  */
-public class Date2LongSerializer extends JsonSerializer<Date> {
+class Date2LongSerializer extends JsonSerializer<Date> {
 
     @Override
     public void serialize(Date date, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {

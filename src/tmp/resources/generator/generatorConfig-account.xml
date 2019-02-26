@@ -16,7 +16,7 @@
         <!-- <jdbcConnection driverClass="com.mysql.jdbc.Driver" -->
         <jdbcConnection
                 driverClass="com.mysql.jdbc.Driver"
-                connectionURL="jdbc:mysql://www.liaowei.net.cn:3306/client?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false"
+                connectionURL="jdbc:mysql://www.liaowei.net.cn:3306/account?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false"
                 userId="root"
                 password="root123"
         />
@@ -26,7 +26,7 @@
         </javaTypeResolver>
 
         <javaModelGenerator
-                targetPackage="com.example.boot.server.pojo.dos.client"
+                targetPackage="com.example.boot.server.pojo.dos.account"
                 targetProject="src/tmp/output"
         >
             <property name="constructorBased" value="false" />
@@ -35,7 +35,7 @@
         </javaModelGenerator>
 
         <sqlMapGenerator
-                targetPackage="dao.client"
+                targetPackage="dao.account"
                 targetProject="src/tmp/output"
         >
             <property name="enableSubPackages" value="true"/>
@@ -43,16 +43,29 @@
 
         <javaClientGenerator
                 type="XMLMAPPER"
-                targetPackage="com.example.boot.server.dao.client"
+                targetPackage="com.example.boot.server.dao.account"
                 targetProject="src/tmp/output"
         >
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
         <table
-                tableName="info"
-                domainObjectName="InfoDO"
-                mapperName="InfoDao"
+                tableName="master"
+                domainObjectName="MasterDO"
+                mapperName="MasterDao"
+                enableDeleteByPrimaryKey="false"
+                enableCountByExample="false"
+                enableUpdateByExample="false"
+                enableDeleteByExample="false"
+                enableSelectByExample="false"
+        >
+                <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
+
+        <table
+                tableName="detail"
+                domainObjectName="DetailDO"
+                mapperName="DetailDao"
                 enableDeleteByPrimaryKey="false"
                 enableCountByExample="false"
                 enableUpdateByExample="false"

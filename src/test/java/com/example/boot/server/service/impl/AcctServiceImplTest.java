@@ -38,10 +38,10 @@ public class AcctServiceImplTest {
     AcctServiceImpl acctService;
 
     @Rule
-    public ExpectedException expectedException = ExpectedException.none();
+    public final ExpectedException expectedException = ExpectedException.none();
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         MasterDO masterDO = new MasterDO("6228671100001111", Short.valueOf("0"), "1234567890", new BigDecimal("100.01"), null, null, null);
         masterDao.insert(masterDO);
         masterDO = new MasterDO("6228671100001112", Short.valueOf("1"), "1234567891", new BigDecimal("200.01"), null, null, null);
@@ -84,18 +84,11 @@ public class AcctServiceImplTest {
     @Test
     public void saveAccount() {
         MasterDO masterDO = new MasterDO();
-        masterDO.setAcctNo("6228671100001114");
         masterDO.setBalance(new BigDecimal("30000"));
         masterDO.setClientNo("1234567890");
         masterDO.setAcctStatus(Short.valueOf("0"));
-        acctService.saveAccount(masterDO);
-    }
-
-    @Test
-    public void addAccountException() {
-        this.saveAccount();
-        expectedException.expect(new BootExceptionMatcher("ACT0001"));
-        this.saveAccount();
+        String acctNo = acctService.saveAccount(masterDO);
+        log.info("acctNo: {}", acctNo);
     }
 
     @Test

@@ -19,7 +19,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
  */
 @Configuration
 @MapperScan(basePackages="com.example.boot.server.dao.account", sqlSessionTemplateRef="accountSqlSessionTemplate" )
-public class AccountDataSourceConfig {
+class AccountDataSourceConfig {
     @Bean("accountDruidDataSource")
     @Primary
     @ConfigurationProperties(prefix="spring.datasource.account.druid")

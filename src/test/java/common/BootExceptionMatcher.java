@@ -8,7 +8,7 @@ import org.hamcrest.TypeSafeMatcher;
  * @author LiaoWei
  */
 public class BootExceptionMatcher extends TypeSafeMatcher<BootException> {
-    private String code;
+    private final String code;
 
     public BootExceptionMatcher(String code) {
         this.code = code;
@@ -16,10 +16,7 @@ public class BootExceptionMatcher extends TypeSafeMatcher<BootException> {
 
     @Override
     protected boolean matchesSafely(BootException item) {
-        if (code.equals(item.getCode())) {
-            return true;
-        }
-        return false;
+        return code.equals(item.getCode());
     }
 
     @Override

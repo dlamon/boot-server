@@ -53,7 +53,7 @@ public class ComplexResultDTO {
     private Date clientUpdateTime;
 
     /** 总条数 */
-    private long total;
+    private Long total;
 
     /** 账户变更详情 */
     @JsonProperty("acctDetails")

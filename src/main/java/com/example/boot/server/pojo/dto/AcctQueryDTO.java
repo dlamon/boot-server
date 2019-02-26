@@ -13,6 +13,9 @@ public class AcctQueryDTO {
     /** 账户编号 */
     String acctNo;
 
+    /** 客户编号 */
+    String clientNo;
+
     /** 开始时间 */
     Date beginTime;
 

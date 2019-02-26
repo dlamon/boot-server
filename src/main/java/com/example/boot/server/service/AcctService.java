@@ -29,8 +29,9 @@ public interface AcctService {
     /**
      * 新增账户
      * @param masterDO 新增的账户信息
+     * @return 账户编号
      */
-    void saveAccount(MasterDO masterDO);
+    String saveAccount(MasterDO masterDO);
 
     /**
      * 更改账户状态
@@ -68,6 +69,12 @@ public interface AcctService {
      */
     void withdrawal(String acctNo, BigDecimal amount, String use);
 
+    /**
+     * 通过客户编号查询账号
+     * @param clientNo 客户编号
+     * @return 账号主要信息列表
+     */
+    List<MasterDO> listMasterByClientNo(String clientNo);
 
     /**
      * 综合查询
@@ -75,4 +82,10 @@ public interface AcctService {
      * @return 综合查询结果
      */
     AcctResultDTO listComplex(AcctQueryDTO acctQueryDTO);
+
+    /**
+     * 删除账户信息
+     * @param acctNo 账户编号
+     */
+    void removeAccount(String acctNo);
 }

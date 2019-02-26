@@ -33,4 +33,10 @@ public interface MasterExtendDao {
      * @return 查询结果列表
      */
     List<MasterDO> selectAllByConditions(MasterQueryDTO masterQueryDTO);
+
+    /**
+     * 通过账户编号删除详细信息
+     * @param acctNo 账户编号
+     */
+    void deleteByPrimaryKey(String acctNo);
 }

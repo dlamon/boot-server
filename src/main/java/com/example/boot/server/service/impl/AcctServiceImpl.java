@@ -13,6 +13,7 @@ import com.example.boot.server.pojo.dto.AcctResultDTO;
 import com.example.boot.server.pojo.dto.DetailQueryDTO;
 import com.example.boot.server.service.AcctService;
 import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,16 +21,17 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @author LiaoWei
  */
 @Service
 public class AcctServiceImpl implements AcctService {
-    private MasterDao masterDao;
-    private DetailDao detailDao;
-    private MasterExtendDao masterExtendDao;
-    private DetailExtendDao detailExtendDao;
+    private final MasterDao masterDao;
+    private final DetailDao detailDao;
+    private final MasterExtendDao masterExtendDao;
+    private final DetailExtendDao detailExtendDao;
 
     public AcctServiceImpl(MasterDao masterDao, DetailDao detailDao, MasterExtendDao masterExtendDao, DetailExtendDao detailExtendDao) {
         this.masterDao = masterDao;
@@ -40,30 +42,39 @@ public class AcctServiceImpl implements AcctService {
 
     @Override
     public MasterDO getMasterInfo(String acctNo) {
-        MasterDO masterDO = masterDao.selectByPrimaryKey(acctNo);
-        return masterDO;
+        return masterDao.selectByPrimaryKey(acctNo);
     }
 
     @Override
     public List<DetailDO> listDetailInfo(String acctNo) {
         DetailQueryDTO detailQueryDTO = new DetailQueryDTO();
         detailQueryDTO.setAcctNo(acctNo);
-        List<DetailDO> detailDOList= detailExtendDao.selectAllByConditions(detailQueryDTO);
-        return detailDOList;
+        return detailExtendDao.selectAllByConditions(detailQueryDTO);
     }
 
     @Override
-    public void saveAccount(MasterDO masterDO) {
+    public String saveAccount(MasterDO masterDO) {
         // 查询账户是否存在
         MasterDO result = this.getMasterInfo(masterDO.getAcctNo());
         if (result != null) {
             throw new BootException("ACT0001");
         }
+        // 生成账号
+        StringBuilder sb = new StringBuilder();
+        sb.append("62286711");
+        Random rand = new Random();
+        int length = 8;
+        for(int i = 0; i < length; i++){
+            sb.append(rand.nextInt(10));
+        }
+        String acctNo = sb.toString();
+        masterDO.setAcctNo(acctNo);
         // 添加账户
         int rows = masterDao.insertSelective(masterDO);
         if (rows != 1) {
             throw new BootException("ACT0003");
         }
+        return acctNo;
     }
 
     @Override
@@ -189,10 +200,24 @@ public class AcctServiceImpl implements AcctService {
     }
 
     @Override
+    public void removeAccount(String acctNo) {
+        masterExtendDao.deleteByPrimaryKey(acctNo);
+        detailExtendDao.deleteByPrimaryKey(acctNo);
+    }
+
+    @Override
+    public List<MasterDO> listMasterByClientNo(String clientNo) {
+       return masterExtendDao.selectAllByClientNo(clientNo);
+    }
+
+    @Override
     public AcctResultDTO listComplex(AcctQueryDTO acctQueryDTO) {
         MasterDO masterDO = this.getMasterInfo(acctQueryDTO.getAcctNo());
         DetailQueryDTO detailQueryDTO = new DetailQueryDTO();
         BeanUtils.copyProperties(acctQueryDTO, detailQueryDTO);
+        if (detailQueryDTO.getPageNum() != null && detailQueryDTO.getPageSize() != null) {
+            PageHelper.startPage(detailQueryDTO.getPageNum(), detailQueryDTO.getPageSize());
+        }
         List<DetailDO> detailDOList= detailExtendDao.selectAllByConditions(detailQueryDTO);
 
         AcctResultDTO acctResultDTO = new AcctResultDTO();
@@ -200,7 +225,12 @@ public class AcctServiceImpl implements AcctService {
             return null;
         }
         BeanUtils.copyProperties(masterDO, acctResultDTO);
-        acctResultDTO.setTotal(((Page)detailDOList).getTotal());
+        if (detailDOList instanceof Page) {
+            acctResultDTO.setTotal(((Page)detailDOList).getTotal());
+        } else {
+            acctResultDTO.setTotal((long)detailDOList.size());
+        }
+
         acctResultDTO.setAcctDetailList(detailDOList);
 
         return acctResultDTO;

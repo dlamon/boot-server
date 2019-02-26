@@ -17,4 +17,10 @@ public interface DetailExtendDao {
      * @return 查询结果列表
      */
     List<DetailDO> selectAllByConditions(DetailQueryDTO detailQueryDTO);
+
+    /**
+     * 通过账户编号删除详细信息
+     * @param acctNo 账户编号
+     */
+    void deleteByPrimaryKey(String acctNo);
 }
