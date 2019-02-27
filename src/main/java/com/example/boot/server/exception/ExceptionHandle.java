@@ -20,6 +20,33 @@ import javax.validation.ConstraintViolationException;
 @Slf4j
 class ExceptionHandle {
 
+    private <E> ResultVO<E> returnByBindingResult(Exception e) {
+        String code = "PRM0001";
+        StringBuilder sb = new StringBuilder();
+        sb.append(MessageUtil.getMessage(code));
+        sb.append("[");
+
+        BindingResult bindingResult = null;
+        if (e instanceof BindException) {
+            bindingResult = ((BindException)e).getBindingResult();
+        } else if (e instanceof MethodArgumentNotValidException) {
+            bindingResult = ((MethodArgumentNotValidException)e).getBindingResult();
+        }
+        if (bindingResult == null) {
+            log.error("{}:{}", code, e);
+            return ResultUtil.error("PRM0001");
+        } else {
+            for (FieldError fieldError : bindingResult.getFieldErrors()) {
+                sb.append(fieldError.getDefaultMessage());
+            }
+            sb.append("]");
+            String message = sb.toString();
+
+            log.error("{}:{}", code, message, e);
+            return ResultUtil.error(code, message);
+        }
+    }
+
     @ExceptionHandler(value = BootException.class)
     public <E> ResultVO<E> handleBootException(BootException e) {
         String code = e.getCode();
@@ -31,20 +58,7 @@ class ExceptionHandle {
 
     @ExceptionHandler(value = BindException.class)
     public <E> ResultVO<E> handleBindException(BindException e) {
-        String code = "PRM0001";
-        StringBuilder sb = new StringBuilder();
-        sb.append(MessageUtil.getMessage(code));
-        sb.append("[");
-
-        BindingResult bindingResult = e.getBindingResult();
-        for (FieldError fieldError : bindingResult.getFieldErrors()) {
-            sb.append(fieldError.getDefaultMessage());
-        }
-        sb.append("]");
-        String message = sb.toString();
-
-        log.error("{}:{}", code, message, e);
-        return ResultUtil.error(code, message);
+        return this.returnByBindingResult(e);
     }
 
     @ExceptionHandler(value = ConstraintViolationException.class)
@@ -61,20 +75,7 @@ class ExceptionHandle {
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public <E> ResultVO<E> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-        String code = "PRM0001";
-        StringBuilder sb = new StringBuilder();
-        sb.append(MessageUtil.getMessage(code));
-        sb.append("[");
-
-        BindingResult bindingResult = e.getBindingResult();
-        for (FieldError fieldError : bindingResult.getFieldErrors()) {
-            sb.append(fieldError.getDefaultMessage());
-        }
-        sb.append("]");
-        String message = sb.toString();
-
-        log.error("{}:{}", code, message, e);
-        return ResultUtil.error(code, message);
+        return this.returnByBindingResult(e);
     }
 
     @ExceptionHandler(value = Exception.class)

@@ -35,12 +35,12 @@ public class ClientServiceImplTest {
     public void setUp() {
         LocalDateTime localDateTime = LocalDateTime.of(2015, 10, 17, 8, 8, 8);
         Date birthDate = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
-        InfoDO infoDO = new InfoDO("19000001", "500235199909991990", "赵齐齐", "2", birthDate, null, null);
+        InfoDO infoDO = new InfoDO("19000001", "500235199909991990", "满依依", "2", birthDate, null, null);
         infoDao.insert(infoDO);
 
         localDateTime = LocalDateTime.of(2016, 10, 17, 8, 8, 8);
         birthDate = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
-        infoDO = new InfoDO("19000002", "500235200009992000", "满依依", "1", birthDate, null, null);
+        infoDO = new InfoDO("19000002", "500235200009992000", "赵齐齐", "1", birthDate, null, null);
         infoDao.insert(infoDO);
     }
 
