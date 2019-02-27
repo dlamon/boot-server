@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
-* Created by Mybatis Generator on 2019/02/19
+* Created by Mybatis Generator on 2019/02/27
 * It's automatically generated, do not modify
 * @author LiaoWei
 */

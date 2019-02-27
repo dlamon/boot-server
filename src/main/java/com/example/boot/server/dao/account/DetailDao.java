@@ -4,19 +4,23 @@ import com.example.boot.server.pojo.dos.account.DetailDO;
 import org.springframework.stereotype.Repository;
 
 /**
-* Created by Mybatis Generator on 2019/02/19
+* Created by Mybatis Generator on 2019/02/27
 * It's automatically generated, do not modify
 * @author LiaoWei
 */
 @Repository
 public interface DetailDao {
     /**
-    * This method corresponds to the database table detail
+    * insert
+    * @param record table detail data object
+    * @return affected rows
     */
     int insert(DetailDO record);
 
     /**
-    * This method corresponds to the database table detail
+    * insertSelective
+    * @param record table detail data object
+    * @return affected rows
     */
     int insertSelective(DetailDO record);
 }

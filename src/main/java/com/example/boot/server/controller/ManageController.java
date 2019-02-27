@@ -37,7 +37,7 @@ public class ManageController {
     }
 
     @PostMapping("/manage/add")
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public ResultVO<AddResultDTO> add(@Valid @RequestBody AddForm addForm) {
         String clientNo;
         String acctNo;
@@ -74,7 +74,7 @@ public class ManageController {
     }
 
     @DeleteMapping("/manage/delete/{idNo}")
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public ResultVO<DeleteResultDTO> delete(@PathVariable("idNo")  @NotBlank(message = "身份证编号不能为空") String idNo) {
         // 查询身份证号对应的客户编号是否存在
         InfoQueryDTO infoQueryDTO = new InfoQueryDTO();

@@ -4,34 +4,44 @@ import com.example.boot.server.pojo.dos.client.InfoDO;
 import org.springframework.stereotype.Repository;
 
 /**
-* Created by Mybatis Generator on 2019/02/25
+* Created by Mybatis Generator on 2019/02/27
 * It's automatically generated, do not modify
 * @author LiaoWei
 */
 @Repository
 public interface InfoDao {
     /**
-    * This method corresponds to the database table detail
+    * insert
+    * @param record table info data object
+    * @return affected rows
     */
     int insert(InfoDO record);
 
     /**
-    * This method corresponds to the database table detail
+    * insertSelective
+    * @param record table info data object
+    * @return affected rows
     */
     int insertSelective(InfoDO record);
 
     /**
-    * This method corresponds to the database table detail
+    * selectByPrimaryKey
+    * @param clientNo primary key
+    * @return table info data object
     */
     InfoDO selectByPrimaryKey(String clientNo);
 
     /**
-    * This method corresponds to the database table detail
+    * updateByPrimaryKeySelective
+    * @param record table info data object
+    * @return affected rows
     */
     int updateByPrimaryKeySelective(InfoDO record);
 
     /**
-    * This method corresponds to the database table detail
+    * updateByPrimaryKey
+    * @param record table info data object
+    * @return affected rows
     */
     int updateByPrimaryKey(InfoDO record);
 }

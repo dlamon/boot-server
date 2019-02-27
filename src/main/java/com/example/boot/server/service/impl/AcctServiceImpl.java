@@ -129,7 +129,7 @@ public class AcctServiceImpl implements AcctService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void deposit(String acctNo, BigDecimal amount) {
         // 查询账户
         MasterDO masterDO = this.getMasterInfo(acctNo);
@@ -163,7 +163,7 @@ public class AcctServiceImpl implements AcctService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void withdrawal(String acctNo, BigDecimal amount, String use) {
         // 查询账户
         MasterDO masterDO = this.getMasterInfo(acctNo);
