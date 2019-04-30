@@ -11,13 +11,13 @@ import com.example.boot.server.pojo.vo.ResultVO;
 import com.example.boot.server.service.AcctService;
 import com.example.boot.server.service.ClientService;
 import com.example.boot.server.util.ResultUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotBlank;
 import java.util.List;
@@ -28,6 +28,8 @@ import java.util.List;
 @RestController
 @Slf4j
 @Validated
+@RequestMapping("/query")
+@Api(tags ="/query", description = "查询账户")
 public class QueryController {
     private final AcctService acctService;
     private final ClientService clientService;
@@ -37,25 +39,26 @@ public class QueryController {
         this.clientService = clientService;
     }
 
-    @GetMapping("query/master")
-    public ResultVO<MasterDO> getMaster(@RequestParam("acctNo") @NotBlank(message = "账户编号不能为空") String acctNo) {
+    @GetMapping("/master")
+    @ApiOperation("查询主要信息")
+    public ResultVO<MasterDO> getMaster(@RequestParam("acctNo") @NotBlank(message = "账户编号不能为空") @ApiParam("账号") String acctNo) {
         MasterDO masterDO = acctService.getMasterInfo(acctNo);
         return ResultUtil.success(masterDO);
     }
 
-    @GetMapping("query/detail")
+    @GetMapping("/detail")
     public ResultVO<List<DetailDO>> getDetail(@NotBlank(message = "账户编号不能为空") String acctNo) {
         List<DetailDO> detailDOList = acctService.listDetailInfo(acctNo);
         return ResultUtil.success(detailDOList);
     }
 
-    @GetMapping("query/client/{clientNo}")
+    @GetMapping("/client/{clientNo}")
     public ResultVO<InfoDO> getClient(@PathVariable("clientNo") @NotBlank(message = "客户编号不能为空") String clientNo) {
         InfoDO infoDO = clientService.getClientInfo(clientNo);
         return ResultUtil.success(infoDO);
     }
 
-    @GetMapping("/query/listComplex")
+    @GetMapping("/listComplex")
     public ResultVO<ComplexResultDTO> listComplex(AcctQueryDTO acctQueryDTO) {
         ComplexResultDTO complexResultDTO = new ComplexResultDTO();
         AcctResultDTO acctResultDTO = acctService.listComplex(acctQueryDTO);

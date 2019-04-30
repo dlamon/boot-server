@@ -11,6 +11,7 @@ import com.example.boot.server.pojo.vo.ResultVO;
 import com.example.boot.server.service.AcctService;
 import com.example.boot.server.service.ClientService;
 import com.example.boot.server.util.ResultUtil;
+import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +28,8 @@ import java.util.List;
  */
 @RestController
 @Slf4j
+@RequestMapping("/manage")
+@Api(tags = "/manage", description = "管理服务")
 public class ManageController {
     private final AcctService acctService;
     private final ClientService clientService;
@@ -36,9 +39,10 @@ public class ManageController {
         this.clientService = clientService;
     }
 
-    @PostMapping("/manage/add")
+    @PostMapping("/add")
     @Transactional(rollbackFor = Exception.class)
-    public ResultVO<AddResultDTO> add(@Valid @RequestBody AddForm addForm) {
+    @ApiOperation("新建账号")
+    public ResultVO<AddResultDTO> add(@Valid @RequestBody @ApiParam("添加表单") AddForm addForm) {
         String clientNo;
         String acctNo;
         InfoQueryDTO infoQueryDTO = new InfoQueryDTO();
@@ -73,7 +77,7 @@ public class ManageController {
         return ResultUtil.success(addResultDTO);
     }
 
-    @DeleteMapping("/manage/delete/{idNo}")
+    @DeleteMapping("delete/{idNo}")
     @Transactional(rollbackFor = Exception.class)
     public ResultVO<DeleteResultDTO> delete(@PathVariable("idNo")  @NotBlank(message = "身份证编号不能为空") String idNo) {
         // 查询身份证号对应的客户编号是否存在

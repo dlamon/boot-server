@@ -1,9 +1,11 @@
 package com.example.boot.server.controller;
 
 import com.example.boot.server.config.CustomConfig;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @Slf4j
+@Api(tags = "/", description = "欢迎信息")
 public class HelloController {
     @Value("${com.example.env}")
     private String env;
@@ -20,7 +23,8 @@ public class HelloController {
         this.customConfig = customConfig;
     }
 
-    @RequestMapping("/")
+    @GetMapping("/")
+    @ApiOperation("欢迎信息")
     public String hello() {
         log.info("current env: {}", env);
         String hello = customConfig.getHello();
